@@ -1,0 +1,846 @@
+"use client";
+
+import React, { useMemo, useRef, useState, useCallback } from "react";
+import Link from "next/link";
+import {
+  TransformWrapper,
+  TransformComponent,
+  useControls,
+} from "react-zoom-pan-pinch";
+
+import {
+  ArrowRightLeft,
+  GitBranch,
+  ZoomIn,
+  ZoomOut,
+  Maximize2,
+  Move,
+} from "lucide-react";
+
+import { RegionZoomToggle } from "@/components/ui/RegionZoomToggle";
+import { useGridLayout } from "@/hooks/useGridLayout";
+import { useTopologyConfig } from "@/hooks/useTopologyConfig";
+import {
+  getQubitGridPosition,
+  type TopologyLayoutParams,
+} from "@/lib/utils/grid-position";
+import { calculateGridDimension } from "@/lib/utils/grid-layout";
+
+import { CouplingMetricHistoryModal } from "./CouplingMetricHistoryModal";
+import { useAnalysisChatContext } from "@/contexts/AnalysisChatContext";
+
+// Dynamic font size calculation based on cell size
+function getCouplingFontSizes(cellSize: number): {
+  qubitLabelSize: string;
+  valueSize: string;
+} {
+  // Scale font sizes proportionally to cell size
+  // Base reference: 60px cell = 14px label, 12px value
+  if (cellSize >= 60) {
+    return { qubitLabelSize: "0.875rem", valueSize: "0.75rem" };
+  } else if (cellSize >= 50) {
+    return { qubitLabelSize: "0.75rem", valueSize: "0.65rem" };
+  } else if (cellSize >= 40) {
+    return { qubitLabelSize: "0.625rem", valueSize: "0.55rem" };
+  } else if (cellSize >= 30) {
+    return { qubitLabelSize: "0.5rem", valueSize: "0.5rem" };
+  } else {
+    // Very small cells (< 30px)
+    return { qubitLabelSize: "0.45rem", valueSize: "0.4rem" };
+  }
+}
+
+interface MetricValue {
+  value: number | null;
+  task_id?: string | null;
+  execution_id?: string | null;
+}
+
+interface CouplingMetricsGridProps {
+  metricData: { [key: string]: MetricValue } | null;
+  title: string;
+  metricKey: string;
+  unit: string;
+  colorScale: {
+    min: number;
+    max: number;
+    colors: string[];
+  };
+  gridSize?: number;
+  chipId: string;
+  topologyId: string;
+  selectedDate: string;
+}
+
+interface SelectedCouplingInfo {
+  couplingId: string;
+  metric: MetricValue;
+}
+
+// Zoom control buttons component
+function ZoomControls() {
+  const { zoomIn, zoomOut, resetTransform } = useControls();
+  return (
+    <div className="absolute top-2 right-2 z-30 flex flex-col gap-1">
+      <button
+        onClick={() => zoomIn()}
+        className="btn btn-sm btn-square btn-ghost bg-base-100/90 shadow-md hover:bg-base-200"
+        title="Zoom in"
+      >
+        <ZoomIn className="h-4 w-4" />
+      </button>
+      <button
+        onClick={() => zoomOut()}
+        className="btn btn-sm btn-square btn-ghost bg-base-100/90 shadow-md hover:bg-base-200"
+        title="Zoom out"
+      >
+        <ZoomOut className="h-4 w-4" />
+      </button>
+      <button
+        onClick={() => resetTransform()}
+        className="btn btn-sm btn-square btn-ghost bg-base-100/90 shadow-md hover:bg-base-200"
+        title="Reset view"
+      >
+        <Maximize2 className="h-4 w-4" />
+      </button>
+    </div>
+  );
+}
+
+export function CouplingMetricsGrid({
+  metricData,
+  title,
+  metricKey,
+  unit,
+  colorScale,
+  gridSize = 8,
+  chipId,
+  topologyId,
+}: CouplingMetricsGridProps) {
+  // Get topology configuration
+  const {
+    muxSize = 2,
+    regionSize = 4,
+    hasMux = false,
+    layoutType = "grid",
+    showMuxBoundaries = false,
+    qubits: topologyQubits,
+    couplings: topologyCouplings,
+    gridSize: topologyGridSize,
+  } = useTopologyConfig(topologyId) ?? {};
+
+  // Calculate actual grid dimensions from topology qubit positions
+  const { gridRows, gridCols } = useMemo(() => {
+    if (topologyQubits) {
+      let maxRow = 0;
+      let maxCol = 0;
+      Object.values(topologyQubits).forEach((pos) => {
+        if (pos.row > maxRow) maxRow = pos.row;
+        if (pos.col > maxCol) maxCol = pos.col;
+      });
+      return { gridRows: maxRow + 1, gridCols: maxCol + 1 };
+    }
+    // Fallback to square grid
+    const size = topologyGridSize ?? gridSize;
+    return { gridRows: size, gridCols: size };
+  }, [topologyQubits, topologyGridSize, gridSize]);
+
+  // Use the larger dimension for calculations
+  const effectiveGridSize = Math.max(gridRows, gridCols);
+  const isSquareGrid = gridRows === gridCols;
+
+  // Layout params for grid position calculations
+  const layoutParams: TopologyLayoutParams = useMemo(
+    () => ({
+      muxEnabled: hasMux,
+      muxSize,
+      gridSize: effectiveGridSize,
+      layoutType,
+    }),
+    [hasMux, muxSize, effectiveGridSize, layoutType],
+  );
+
+  // Coupling direction toggle: when true, reverse all coupling IDs
+  const [isDirectionReversed, setIsDirectionReversed] = useState(false);
+
+  // View mode state: 'pan-zoom' for DOM with pan/zoom, 'region' for region zoom
+  const [viewMode, setViewMode] = useState<"pan-zoom" | "region">("pan-zoom");
+
+  // Region selection state
+  const [regionSelectionEnabled, setRegionSelectionEnabled] = useState(false);
+  const [zoomMode, setZoomMode] = useState<"full" | "region">("full");
+
+  // LOD (Level of Detail) state for pan-zoom mode
+  const [lodLevel, setLodLevel] = useState<"high" | "medium" | "low">("high");
+  const lodTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Handle transform changes for LOD (debounced)
+  const handleTransform = useCallback((ref: { state: { scale: number } }) => {
+    if (lodTimeoutRef.current) {
+      clearTimeout(lodTimeoutRef.current);
+    }
+    lodTimeoutRef.current = setTimeout(() => {
+      const scale = ref.state.scale;
+      const newLod = scale >= 0.9 ? "high" : scale >= 0.6 ? "medium" : "low";
+      setLodLevel((prev) => (prev !== newLod ? newLod : prev));
+    }, 100);
+  }, []);
+
+  // LOD-based visibility flags
+  const showValues = lodLevel !== "low" || viewMode === "region";
+  const showUnits = lodLevel === "high" || viewMode === "region";
+  const [selectedRegion, setSelectedRegion] = useState<{
+    row: number;
+    col: number;
+  } | null>(null);
+  const [hoveredRegion, setHoveredRegion] = useState<{
+    row: number;
+    col: number;
+  } | null>(null);
+
+  // Modal state
+  const [selectedCouplingInfo, setSelectedCouplingInfo] =
+    useState<SelectedCouplingInfo | null>(null);
+  const isModalOpen = selectedCouplingInfo !== null;
+  const { isOpen: isSidebarOpen } = useAnalysisChatContext();
+
+  // Use grid layout hook for responsive sizing
+  const displayCols = zoomMode === "region" ? regionSize : gridCols;
+  const displayRows = zoomMode === "region" ? regionSize : gridRows;
+  const { containerRef, cellSize, isMobile, viewportHeight, gap, padding } =
+    useGridLayout({
+      cols: displayCols,
+      rows: displayRows,
+      reservedHeight: { mobile: 300, desktop: 350 },
+      deps: [metricData],
+    });
+
+  const numRegions = Math.floor(effectiveGridSize / regionSize);
+
+  // Helper function to interpolate between two hex colors
+  const interpolateColor = (
+    color1: string,
+    color2: string,
+    factor: number,
+  ): string => {
+    const c1 = parseInt(color1.slice(1), 16);
+    const c2 = parseInt(color2.slice(1), 16);
+
+    const r1 = (c1 >> 16) & 0xff;
+    const g1 = (c1 >> 8) & 0xff;
+    const b1 = c1 & 0xff;
+
+    const r2 = (c2 >> 16) & 0xff;
+    const g2 = (c2 >> 8) & 0xff;
+    const b2 = c2 & 0xff;
+
+    const r = Math.round(r1 + (r2 - r1) * factor);
+    const g = Math.round(g1 + (g2 - g1) * factor);
+    const b = Math.round(b1 + (b2 - b1) * factor);
+
+    return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+  };
+
+  // Calculate color for a value
+  const getColor = (
+    value: number | null,
+    autoMin: number,
+    autoMax: number,
+  ): string | null => {
+    if (value === null || value === undefined) {
+      return null;
+    }
+
+    const { colors } = colorScale;
+    if (colors.length === 0) return null;
+
+    const effectiveMin =
+      colorScale.min === 0 && colorScale.max === 0 ? autoMin : colorScale.min;
+    const effectiveMax =
+      colorScale.min === 0 && colorScale.max === 0 ? autoMax : colorScale.max;
+
+    if (effectiveMin === effectiveMax) {
+      return colors[colors.length - 1];
+    }
+
+    const normalized = Math.max(
+      0,
+      Math.min(1, (value - effectiveMin) / (effectiveMax - effectiveMin)),
+    );
+
+    const position = normalized * (colors.length - 1);
+    const lowerIndex = Math.floor(position);
+    const upperIndex = Math.min(lowerIndex + 1, colors.length - 1);
+    const factor = position - lowerIndex;
+
+    if (factor === 0 || lowerIndex === upperIndex) {
+      return colors[lowerIndex];
+    }
+
+    return interpolateColor(colors[lowerIndex], colors[upperIndex], factor);
+  };
+
+  // Calculate statistics
+  const stats = useMemo(() => {
+    if (!metricData) return null;
+
+    const values = Object.values(metricData)
+      .map((m) => m.value)
+      .filter((v): v is number => v !== null && v !== undefined);
+
+    if (values.length === 0) return null;
+
+    const sum = values.reduce((a, b) => a + b, 0);
+    const avg = sum / values.length;
+    const sortedValues = [...values].sort((a, b) => a - b);
+    const min = sortedValues[0];
+    const max = sortedValues[sortedValues.length - 1];
+    const median = sortedValues[Math.floor(sortedValues.length / 2)];
+
+    return {
+      count: values.length,
+      avg,
+      min,
+      max,
+      median,
+    };
+  }, [metricData]);
+
+  // Helper function to get qubit position from topology (explicit) or computed
+  const getQubitPosition = (qid: number) => {
+    // Try explicit position from topology first
+    if (topologyQubits && topologyQubits[qid]) {
+      return topologyQubits[qid];
+    }
+    // Fallback to computed position
+    return getQubitGridPosition(qid, layoutParams);
+  };
+
+  // Helper function to check if a qubit is in the displayed region
+  const isQubitInRegion = (qid: number): boolean => {
+    if (zoomMode === "full") return true;
+
+    const pos = getQubitPosition(qid);
+
+    const displayGridStart = selectedRegion
+      ? {
+          row: selectedRegion.row * regionSize,
+          col: selectedRegion.col * regionSize,
+        }
+      : { row: 0, col: 0 };
+
+    return (
+      pos.row >= displayGridStart.row &&
+      pos.row < displayGridStart.row + regionSize &&
+      pos.col >= displayGridStart.col &&
+      pos.col < displayGridStart.col + regionSize
+    );
+  };
+
+  // Helper function to check if a coupling is in the displayed region
+  const isCouplingInRegion = (qid1: number, qid2: number): boolean => {
+    return isQubitInRegion(qid1) && isQubitInRegion(qid2);
+  };
+
+  // Use empty object if no data, so grid structure is still shown
+  const displayData = metricData ?? {};
+
+  const displayGridSize =
+    zoomMode === "region" ? regionSize : effectiveGridSize;
+  const displayCellSize = zoomMode === "region" ? cellSize * 0.8 : cellSize;
+  const displayGridStart = selectedRegion
+    ? {
+        row: selectedRegion.row * regionSize,
+        col: selectedRegion.col * regionSize,
+      }
+    : { row: 0, col: 0 };
+
+  // Grid content to be rendered (extracted for reuse)
+  const gridContent = (
+    <div
+      className="relative flex-shrink-0"
+      style={{
+        width: calculateGridDimension(
+          displayGridSize,
+          displayCellSize,
+          isMobile,
+          viewportHeight,
+        ),
+        height: calculateGridDimension(
+          displayGridSize,
+          displayCellSize,
+          isMobile,
+          viewportHeight,
+        ),
+        maxWidth: viewMode === "pan-zoom" ? "none" : "100%",
+        willChange: viewMode === "pan-zoom" ? "transform" : "auto",
+      }}
+    >
+      {/* Qubit cells (background) with MUX styling */}
+      {(() => {
+        // Use topology qubits if available, otherwise fall back to computed positions
+        const qubitList = topologyQubits
+          ? Object.keys(topologyQubits).map(Number)
+          : Array.from(
+              { length: effectiveGridSize * effectiveGridSize },
+              (_, i) => i,
+            );
+
+        return qubitList
+          .filter((qid) => isQubitInRegion(qid))
+          .map((qid) => {
+            const pos = getQubitPosition(qid);
+
+            const displayRow = pos.row - displayGridStart.row;
+            const displayCol = pos.col - displayGridStart.col;
+            const x = displayCol * (displayCellSize + gap);
+            const y = displayRow * (displayCellSize + gap);
+
+            // Calculate MUX index for this cell (using actual position, not display position)
+            const muxRow = Math.floor(pos.row / muxSize);
+            const muxCol = Math.floor(pos.col / muxSize);
+            const isEvenMux = (muxRow + muxCol) % 2 === 0;
+
+            // MUX styling class
+            const muxBgClass =
+              hasMux && showMuxBoundaries
+                ? isEvenMux
+                  ? "ring-2 ring-inset ring-primary/20"
+                  : "ring-2 ring-inset ring-secondary/20"
+                : "";
+
+            const fontSizes = getCouplingFontSizes(displayCellSize);
+            return (
+              <div
+                key={qid}
+                className={`absolute bg-base-300/30 rounded-lg flex items-center justify-center text-base-content/30 ${muxBgClass}`}
+                style={{
+                  top: y,
+                  left: x,
+                  width: displayCellSize,
+                  height: displayCellSize,
+                  fontSize: fontSizes.qubitLabelSize,
+                }}
+              >
+                {qid}
+              </div>
+            );
+          });
+      })()}
+
+      {/* MUX labels - centered in each MUX group */}
+      {hasMux && showMuxBoundaries && (
+        <>
+          {Array.from({
+            length: Math.pow(Math.ceil(displayGridSize / muxSize), 2),
+          }).map((_, idx) => {
+            const numMuxCols = Math.ceil(displayGridSize / muxSize);
+            const muxLocalRow = Math.floor(idx / numMuxCols);
+            const muxLocalCol = idx % numMuxCols;
+
+            // Calculate actual MUX position considering zoom offset
+            const muxActualRow =
+              Math.floor(displayGridStart.row / muxSize) + muxLocalRow;
+            const muxActualCol =
+              Math.floor(displayGridStart.col / muxSize) + muxLocalCol;
+            const muxIndex =
+              muxActualRow * Math.floor(effectiveGridSize / muxSize) +
+              muxActualCol;
+
+            // Calculate center position of MUX group
+            const muxCenterX =
+              (muxLocalCol * muxSize + muxSize / 2) * (displayCellSize + gap) -
+              gap / 2;
+            const muxCenterY =
+              (muxLocalRow * muxSize + muxSize / 2) * (displayCellSize + gap) -
+              gap / 2;
+
+            return (
+              <div
+                key={`mux-label-${idx}`}
+                className={`absolute z-10 pointer-events-none ${
+                  zoomMode === "full" ? "hidden md:flex" : "flex"
+                }`}
+                style={{
+                  top: muxCenterY,
+                  left: muxCenterX,
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                <div className="text-[0.45rem] md:text-[0.6rem] font-semibold text-base-content/30 bg-base-100/60 px-1 py-px rounded border border-base-content/5">
+                  MUX{muxIndex}
+                </div>
+              </div>
+            );
+          })}
+        </>
+      )}
+
+      {/* Coupling cells (overlay) - render all topology couplings */}
+      {(() => {
+        // Use topology couplings if available, otherwise use data keys
+        const couplingList: [number, number][] = topologyCouplings
+          ? topologyCouplings
+          : Object.keys(displayData).map((key) => {
+              const [a, b] = key.split("-").map(Number);
+              return [a, b] as [number, number];
+            });
+
+        return couplingList
+          .filter(([qid1, qid2]) => isCouplingInRegion(qid1, qid2))
+          .map(([qid1, qid2]) => {
+            // Topology order [qid1, qid2] defines the default direction
+            const topoId = `${qid1}-${qid2}`;
+            const topoReverseId = `${qid2}-${qid1}`;
+            // Apply direction toggle
+            const couplingId = isDirectionReversed ? topoReverseId : topoId;
+            const metric = displayData[couplingId];
+
+            // Use explicit positions from topology
+            const pos1 = getQubitPosition(qid1);
+            const pos2 = getQubitPosition(qid2);
+            const row1 = pos1.row;
+            const col1 = pos1.col;
+            const row2 = pos2.row;
+            const col2 = pos2.col;
+
+            const displayRow1 = row1 - displayGridStart.row;
+            const displayCol1 = col1 - displayGridStart.col;
+            const displayRow2 = row2 - displayGridStart.row;
+            const displayCol2 = col2 - displayGridStart.col;
+            const centerX =
+              ((displayCol1 + displayCol2) / 2) * (displayCellSize + gap) +
+              displayCellSize / 2;
+            const centerY =
+              ((displayRow1 + displayRow2) / 2) * (displayCellSize + gap) +
+              displayCellSize / 2;
+
+            const value = metric?.value ?? null;
+            const bgColor = stats
+              ? getColor(value, stats.min, stats.max)
+              : null;
+
+            // Calculate direction arrow angle from source to target qubit positions
+            const [srcQ, tgtQ] = couplingId.split("-");
+            const srcPos = getQubitPosition(Number(srcQ));
+            const tgtPos = getQubitPosition(Number(tgtQ));
+            const dx = tgtPos.col - srcPos.col;
+            const dy = tgtPos.row - srcPos.row;
+            // Angle in degrees: 0=right, 90=down, 180=left, 270=up
+            const arrowAngle = (Math.atan2(dy, dx) * 180) / Math.PI;
+
+            const valueFontSizes = getCouplingFontSizes(displayCellSize);
+            return (
+              <button
+                key={couplingId}
+                onClick={() =>
+                  metric && setSelectedCouplingInfo({ couplingId, metric })
+                }
+                style={{
+                  position: "absolute",
+                  top: centerY,
+                  left: centerX,
+                  width: displayCellSize * 0.75,
+                  height: displayCellSize * 0.5,
+                  backgroundColor: bgColor || undefined,
+                }}
+                className={`rounded-md shadow-md flex flex-col items-center justify-center transition-all hover:shadow-xl hover:scale-110 -translate-x-1/2 -translate-y-1/2 relative group cursor-pointer ${
+                  !bgColor ? "bg-base-300/50" : ""
+                }`}
+              >
+                {/* Value Display - LOD controlled */}
+                {value !== null && value !== undefined && showValues && (
+                  <div
+                    className="font-bold text-white drop-shadow-md leading-tight"
+                    style={{ fontSize: valueFontSizes.valueSize }}
+                  >
+                    {value.toFixed(showUnits ? 2 : 1)}
+                  </div>
+                )}
+
+                {/* No data indicator - LOD controlled */}
+                {(value === null || value === undefined) && showValues && (
+                  <div
+                    className="text-base-content/40 font-medium"
+                    style={{ fontSize: valueFontSizes.valueSize }}
+                  >
+                    —
+                  </div>
+                )}
+
+                {/* Direction arrow pointing from source to target qubit */}
+                {showValues && (
+                  <svg
+                    width="14"
+                    height="6"
+                    viewBox="0 0 18 7"
+                    className="mt-px drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                    style={{
+                      transform: `rotate(${arrowAngle}deg)`,
+                    }}
+                  >
+                    <line
+                      x1="1"
+                      y1="3.5"
+                      x2="14"
+                      y2="3.5"
+                      stroke="white"
+                      strokeWidth="1.5"
+                    />
+                    <polyline
+                      points="11,0.5 16,3.5 11,6.5"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
+
+                {/* Hover tooltip - always show on hover */}
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-base-100 text-base-content text-sm rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                  {value !== null && value !== undefined
+                    ? `${srcQ}\u2192${tgtQ}: ${value.toFixed(4)} ${unit}`
+                    : `${srcQ}\u2192${tgtQ}: No data`}
+                </div>
+              </button>
+            );
+          });
+      })()}
+
+      {/* Region selection overlay - only for square grids */}
+      {zoomMode === "full" && regionSelectionEnabled && isSquareGrid && (
+        <>
+          {Array.from({ length: numRegions * numRegions }).map((_, index) => {
+            const regionRow = Math.floor(index / numRegions);
+            const regionCol = index % numRegions;
+            const isHovered =
+              hoveredRegion?.row === regionRow &&
+              hoveredRegion?.col === regionCol;
+
+            const regionX = regionCol * regionSize * (displayCellSize + gap);
+            const regionY = regionRow * regionSize * (displayCellSize + gap);
+            const regionWidth = regionSize * (displayCellSize + gap) - gap;
+            const regionHeight = regionSize * (displayCellSize + gap) - gap;
+
+            return (
+              <button
+                key={index}
+                className={`absolute transition-colors duration-200 rounded-lg flex items-center justify-center z-20 ${
+                  isHovered
+                    ? "bg-primary/30 border-2 border-primary shadow-lg"
+                    : "bg-primary/5 border-2 border-primary/20 hover:border-primary/40 hover:bg-primary/10"
+                }`}
+                style={{
+                  top: regionY,
+                  left: regionX,
+                  width: regionWidth,
+                  height: regionHeight,
+                }}
+                onMouseEnter={() =>
+                  setHoveredRegion({ row: regionRow, col: regionCol })
+                }
+                onMouseLeave={() => setHoveredRegion(null)}
+                onClick={() => {
+                  setSelectedRegion({ row: regionRow, col: regionCol });
+                  setZoomMode("region");
+                }}
+                title={`Zoom to region (${regionRow + 1}, ${regionCol + 1})`}
+              >
+                <span className="text-xs font-bold text-white bg-black/50 px-2 py-1 rounded">
+                  {regionRow},{regionCol}
+                </span>
+              </button>
+            );
+          })}
+        </>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col h-full" ref={containerRef}>
+      {/* View mode toggle */}
+      <div className="flex items-center justify-between px-1 md:px-4 py-2">
+        <div className="tabs tabs-boxed bg-base-200/50 p-1">
+          <button
+            className={`tab gap-2 ${viewMode === "pan-zoom" ? "tab-active" : ""}`}
+            onClick={() => {
+              setViewMode("pan-zoom");
+              setZoomMode("full");
+              setSelectedRegion(null);
+              setRegionSelectionEnabled(false);
+            }}
+          >
+            <Move className="h-4 w-4" />
+            <span className="hidden sm:inline">DOM</span>
+          </button>
+          {isSquareGrid && (
+            <button
+              className={`tab gap-2 ${viewMode === "region" ? "tab-active" : ""}`}
+              onClick={() => setViewMode("region")}
+            >
+              <Maximize2 className="h-4 w-4" />
+              <span className="hidden sm:inline">Region</span>
+            </button>
+          )}
+        </div>
+
+        <div className="flex items-center gap-2">
+          {viewMode === "region" && zoomMode === "full" && isSquareGrid && (
+            <RegionZoomToggle
+              enabled={regionSelectionEnabled}
+              onToggle={setRegionSelectionEnabled}
+            />
+          )}
+          <button
+            onClick={() => setIsDirectionReversed((prev) => !prev)}
+            className={`btn btn-sm gap-1.5 ${isDirectionReversed ? "btn-secondary" : "btn-outline"}`}
+            title={
+              isDirectionReversed
+                ? "Showing reverse direction"
+                : "Showing forward direction"
+            }
+          >
+            <ArrowRightLeft className="h-3.5 w-3.5" />
+            <span className="text-xs">
+              {isDirectionReversed ? "Reverse" : "Forward"}
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {/* Back button when in region mode */}
+      {viewMode === "region" && zoomMode === "region" && selectedRegion && (
+        <div className="flex items-center gap-4 px-1 md:px-4 py-2">
+          <button
+            onClick={() => {
+              setZoomMode("full");
+              setSelectedRegion(null);
+            }}
+            className="btn btn-sm btn-ghost"
+          >
+            ← Back to Full View
+          </button>
+          <span className="text-sm text-base-content/70">
+            Region {selectedRegion.row + 1},{selectedRegion.col + 1}
+          </span>
+        </div>
+      )}
+
+      {/* Grid display */}
+      <div
+        className={`flex-1 relative overflow-hidden flex justify-center ${
+          viewMode === "pan-zoom"
+            ? "bg-base-200/30 border-2 border-dashed border-base-300 rounded-lg"
+            : ""
+        }`}
+        style={{ padding: `${Math.max(4, padding / 4)}px` }}
+      >
+        {viewMode === "pan-zoom" ? (
+          <TransformWrapper
+            initialScale={1}
+            minScale={0.3}
+            maxScale={4}
+            wheel={{ step: 0.08, smoothStep: 0.004 }}
+            pinch={{ step: 5 }}
+            doubleClick={{ mode: "zoomIn", step: 0.7 }}
+            panning={{ velocityDisabled: false }}
+            smooth={true}
+            onTransformed={handleTransform}
+          >
+            <ZoomControls />
+            <TransformComponent
+              wrapperStyle={{ width: "100%", height: "100%" }}
+              contentStyle={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {gridContent}
+            </TransformComponent>
+          </TransformWrapper>
+        ) : (
+          gridContent
+        )}
+      </div>
+
+      {/* Coupling Detail Modal with History */}
+      <div
+        className={`modal modal-bottom sm:modal-middle ${isModalOpen ? "modal-open" : ""}`}
+        style={{
+          width: isSidebarOpen ? "calc(100% - 20rem)" : "100%",
+          maxWidth: "none",
+          transition: "width 300ms ease",
+        }}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) setSelectedCouplingInfo(null);
+        }}
+      >
+        <div
+          className="modal-box w-full bg-base-100 p-0 h-[90vh] sm:h-[95vh] overflow-hidden flex flex-col"
+          style={{
+            maxWidth: isSidebarOpen
+              ? "min(calc(100vw - 22rem), 1400px)"
+              : "1800px",
+            transition: "max-width 300ms ease",
+          }}
+        >
+          {selectedCouplingInfo && (
+            <>
+              {/* Modal Header */}
+              <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-base-300 flex items-center justify-between">
+                <div className="min-w-0 flex-1">
+                  <h2 className="text-lg sm:text-2xl font-bold truncate">
+                    {selectedCouplingInfo.couplingId} - {title}
+                  </h2>
+                  <p className="text-sm sm:text-base text-base-content/70 mt-0.5 sm:mt-1">
+                    {selectedCouplingInfo.metric.value !== null
+                      ? `${selectedCouplingInfo.metric.value.toFixed(4)} ${unit}`
+                      : "No data"}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setSelectedCouplingInfo(null)}
+                  className="btn btn-ghost btn-sm btn-circle flex-shrink-0 ml-2"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Modal Content - History */}
+              <div className="flex-1 overflow-auto p-3 sm:p-6">
+                <CouplingMetricHistoryModal
+                  chipId={chipId}
+                  couplingId={selectedCouplingInfo.couplingId}
+                  metricName={metricKey}
+                  metricUnit={unit}
+                />
+              </div>
+
+              {/* Modal Footer */}
+              <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-base-300 flex justify-between items-center">
+                <Link
+                  href={`/provenance?parameter=${encodeURIComponent(metricKey)}&qid=${encodeURIComponent(selectedCouplingInfo.couplingId)}&tab=lineage`}
+                  className="btn btn-ghost btn-sm sm:btn-md gap-1"
+                >
+                  <GitBranch className="h-4 w-4" />
+                  <span className="hidden sm:inline">Lineage</span>
+                </Link>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setSelectedCouplingInfo(null)}
+                    className="btn btn-ghost btn-sm sm:btn-md"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

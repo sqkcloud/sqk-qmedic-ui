@@ -1,0 +1,1850 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui";
+
+/* ========================================
+   Rich Interactive Design System
+   ======================================== */
+
+/*
+ * Performance-optimized transitions
+ * Only apply to interactive elements, not all elements
+ * This prevents animation jank on data-heavy pages
+ */
+
+/* Buttons, links, and interactive elements */
+.btn,
+.badge,
+.tab,
+.menu li > a,
+.menu li > button,
+.dropdown-content,
+.alert {
+  transition-property:
+    background-color, border-color, color, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Button active press effect */
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Button focus ring improvement */
+.btn:focus-visible {
+  outline: 2px solid oklch(var(--p) / 0.5);
+  outline-offset: 2px;
+}
+
+/* Cards - only apply transition if not already set by component */
+.card:not([class*="transition-"]) {
+  transition-property: box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Tab active state improvement */
+.tab.tab-active {
+  position: relative;
+}
+
+.tabs-boxed .tab.tab-active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: oklch(var(--p));
+  border-radius: 1px;
+}
+
+/* Form elements - only border and shadow */
+input,
+textarea,
+select,
+.input,
+.select,
+.textarea {
+  transition-property: border-color, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Enhanced input focus states */
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: oklch(var(--p));
+  box-shadow: 0 0 0 3px oklch(var(--p) / 0.15);
+}
+
+/* Disable transitions during page load and for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ----------------------------------------
+   Card & Box Styles - Rich Interactive
+   ---------------------------------------- */
+
+/* Rich card with deeper shadow */
+.card {
+  border-radius: 1rem;
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  border: 1px solid
+    color-mix(in oklch, var(--color-base-content) 8%, transparent);
+}
+
+.card:hover {
+  box-shadow:
+    0 10px 15px -3px rgb(0 0 0 / 0.15),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* Interactive cards get lift effect with glow */
+.card[role="button"]:hover,
+.card.cursor-pointer:hover,
+button.card:hover,
+a.card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 25px -5px rgb(0 0 0 / 0.15),
+    0 8px 10px -6px rgb(0 0 0 / 0.1),
+    0 0 0 1px color-mix(in oklch, var(--color-primary) 20%, transparent);
+}
+
+/* ----------------------------------------
+   Button Styles - Rich Interactive
+   ---------------------------------------- */
+
+/* Base button improvements */
+.btn {
+  border-radius: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow:
+    0 2px 4px 0 rgb(0 0 0 / 0.1),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgb(255 255 255 / 0.1), transparent);
+  pointer-events: none;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 12px -2px rgb(0 0 0 / 0.15),
+    0 4px 6px -2px rgb(0 0 0 / 0.1),
+    inset 0 1px 0 0 rgb(255 255 255 / 0.15);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow:
+    0 1px 2px 0 rgb(0 0 0 / 0.1),
+    inset 0 2px 4px 0 rgb(0 0 0 / 0.1);
+}
+
+/* Primary button with gradient */
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    color-mix(in oklch, var(--color-primary) 80%, var(--color-accent))
+  );
+  color: var(--color-primary-content);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklch, var(--color-primary) 90%, white),
+    var(--color-primary)
+  );
+}
+
+/* Secondary button with gradient */
+.btn-secondary {
+  background: linear-gradient(
+    135deg,
+    var(--color-secondary),
+    color-mix(in oklch, var(--color-secondary) 80%, var(--color-accent))
+  );
+  color: var(--color-secondary-content);
+}
+
+/* Ghost buttons - subtle hover effect */
+.btn-ghost {
+  box-shadow: none;
+  background: transparent;
+}
+
+.btn-ghost::before {
+  display: none;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  box-shadow: none;
+  transform: none;
+  background-color: color-mix(
+    in oklch,
+    var(--color-base-content) 10%,
+    transparent
+  );
+}
+
+/* Small buttons - proportional effects */
+.btn-xs,
+.btn-sm {
+  border-radius: 0.5rem;
+}
+
+.btn-xs:hover:not(:disabled),
+.btn-sm:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+/* ----------------------------------------
+   Input Styles - Rich Interactive
+   ---------------------------------------- */
+
+/* Input fields with rich focus state */
+.input,
+.select,
+.textarea {
+  border-radius: 0.75rem;
+  border: 2px solid var(--color-base-300);
+  background-color: var(--color-base-100);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.3s ease,
+    background-color 0.2s ease;
+}
+
+.input:hover,
+.select:hover,
+.textarea:hover {
+  border-color: color-mix(
+    in oklch,
+    var(--color-primary) 50%,
+    var(--color-base-300)
+  );
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: var(--color-primary);
+  box-shadow:
+    0 0 0 4px color-mix(in oklch, var(--color-primary) 20%, transparent),
+    0 4px 6px -1px rgb(0 0 0 / 0.1);
+  outline: none;
+  background-color: var(--color-base-100);
+}
+
+/* ----------------------------------------
+   Badge & Chip Styles - Rich
+   ---------------------------------------- */
+
+.badge {
+  border-radius: 9999px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.1);
+}
+
+.badge-primary {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    color-mix(in oklch, var(--color-primary) 80%, var(--color-accent))
+  );
+}
+
+.badge-secondary {
+  background: linear-gradient(
+    135deg,
+    var(--color-secondary),
+    color-mix(in oklch, var(--color-secondary) 80%, var(--color-accent))
+  );
+}
+
+/* ----------------------------------------
+   Tab Styles - Rich Interactive
+   ---------------------------------------- */
+
+.tabs-boxed {
+  background-color: var(--color-base-200);
+  border-radius: 1rem;
+  padding: 0.375rem;
+  box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.06);
+}
+
+.tabs-boxed .tab {
+  border-radius: 0.625rem;
+  transition: all 0.25s ease-out;
+  font-weight: 500;
+}
+
+.tabs-boxed .tab:hover:not(.tab-active) {
+  background-color: color-mix(
+    in oklch,
+    var(--color-base-content) 5%,
+    transparent
+  );
+}
+
+.tabs-boxed .tab-active {
+  background-color: var(--color-base-100);
+  box-shadow:
+    0 2px 8px 0 rgb(0 0 0 / 0.12),
+    0 1px 2px 0 rgb(0 0 0 / 0.08);
+  font-weight: 600;
+}
+
+/* ----------------------------------------
+   Modal Styles - Rich Interactive
+   ---------------------------------------- */
+
+.modal-box {
+  border-radius: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  border: 1px solid
+    color-mix(in oklch, var(--color-base-content) 10%, transparent);
+  will-change: transform, opacity;
+  contain: layout style paint;
+}
+
+/* Disable all default modal transitions for instant close */
+.modal {
+  transition: none !important;
+}
+
+.modal-box {
+  transition: none !important;
+}
+
+/* Modal backdrop - no transition */
+.modal-backdrop,
+.modal::backdrop {
+  background-color: rgb(0 0 0 / 0.4);
+  transition: none !important;
+}
+
+/* Modal animation - instant/snappy */
+@keyframes modal-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modal-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Desktop: instant pop animation */
+@media (min-width: 640px) {
+  .modal[open] .modal-box {
+    animation: modal-pop 50ms ease-out;
+  }
+
+  .modal[open]::backdrop {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Mobile: very fast slide-up animation */
+@media (max-width: 639px) {
+  .modal-bottom[open] .modal-box {
+    animation: modal-slide-up 60ms ease-out;
+  }
+
+  .modal-bottom[open]::backdrop {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------
+   Alert Styles - Rich
+   ---------------------------------------- */
+
+.alert {
+  border-radius: 1rem;
+  border: 1px solid color-mix(in oklch, currentColor 20%, transparent);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+/* ----------------------------------------
+   Table Styles - Rich
+   ---------------------------------------- */
+
+.table {
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+}
+
+.table th {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--color-base-content);
+  opacity: 0.7;
+  background-color: color-mix(in oklch, var(--color-base-200) 50%, transparent);
+}
+
+/* Table row hover - use simple background change without transition */
+.table tbody tr {
+  transition: none;
+}
+
+.table tr:hover td {
+  background-color: color-mix(in oklch, var(--color-primary) 5%, transparent);
+}
+
+/* ----------------------------------------
+   Dropdown Styles - Rich
+   ---------------------------------------- */
+
+.dropdown-content {
+  border-radius: 1rem;
+  box-shadow:
+    0 10px 25px -5px rgb(0 0 0 / 0.2),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  border: 1px solid
+    color-mix(in oklch, var(--color-base-content) 10%, transparent);
+  animation: dropdownFadeIn 0.2s ease-out;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ----------------------------------------
+   Menu Styles - Rich
+   ---------------------------------------- */
+
+.menu li > a:hover,
+.menu li > button:hover {
+  background-color: color-mix(in oklch, var(--color-primary) 10%, transparent);
+}
+
+.menu li > a.active,
+.menu li > button.active {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    color-mix(in oklch, var(--color-primary) 85%, var(--color-accent))
+  );
+  color: var(--color-primary-content);
+  font-weight: 600;
+  box-shadow: 0 2px 8px -2px
+    color-mix(in oklch, var(--color-primary) 50%, transparent);
+}
+
+/* ----------------------------------------
+   Scrollbar Styles - Rich
+   ---------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: color-mix(in oklch, var(--color-base-300) 30%, transparent);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    var(--color-base-300),
+    color-mix(in oklch, var(--color-base-300) 80%, var(--color-base-content))
+  );
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklch, var(--color-base-content) 30%, var(--color-base-300)),
+    var(--color-base-300)
+  );
+}
+
+/* ----------------------------------------
+   Loading Spinner Enhancement
+   ---------------------------------------- */
+
+.loading {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* ----------------------------------------
+   Tooltip Styles - Rich
+   ---------------------------------------- */
+
+.tooltip::before {
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px -2px rgb(0 0 0 / 0.2);
+  font-weight: 500;
+}
+
+/* Import DaisyUI themes */
+@import "daisyui/theme/light.css";
+@import "daisyui/theme/dark.css";
+
+/* ----------------------------------------
+   VitePress-based Light Theme Override
+   Using higher specificity to override DaisyUI defaults
+   ---------------------------------------- */
+html[data-theme="light"],
+:root[data-theme="light"],
+[data-theme="light"] {
+  /* Base colors - VitePress light mode */
+  --color-base-100: #ffffff !important;
+  --color-base-200: #f6f6f7 !important;
+  --color-base-300: #e2e2e3 !important;
+  --color-base-content: #3c3c43 !important;
+
+  /* Primary colors - OQTOPUS brand */
+  --color-primary: #2b4a73 !important;
+  --color-primary-content: #ffffff !important;
+  --color-secondary: #e21331 !important;
+  --color-secondary-content: #ffffff !important;
+  --color-accent: #3b3be8 !important;
+  --color-accent-content: #ffffff !important;
+  --color-neutral: #dddde3 !important;
+  --color-neutral-content: #3c3c43 !important;
+
+  /* Status colors - VitePress palette */
+  --color-info: #3a5ccc !important;
+  --color-info-content: #ffffff !important;
+  --color-success: #18794e !important;
+  --color-success-content: #ffffff !important;
+  --color-warning: #d97706 !important;
+  --color-warning-content: #ffffff !important;
+  --color-error: #b8272c !important;
+  --color-error-content: #ffffff !important;
+}
+
+/* ----------------------------------------
+   VitePress-based Dark Theme Override
+   Using higher specificity to override DaisyUI defaults
+   ---------------------------------------- */
+html[data-theme="dark"],
+:root[data-theme="dark"],
+[data-theme="dark"] {
+  /* Base colors - VitePress dark mode */
+  --color-base-100: #1b1b1f !important;
+  --color-base-200: #161618 !important;
+  --color-base-300: #2e2e32 !important;
+  --color-base-content: rgba(255, 255, 255, 0.87) !important;
+
+  /* Primary colors - OQTOPUS brand (dark variants) */
+  --color-primary: #2b4a73 !important;
+  --color-primary-content: #ffffff !important;
+  --color-secondary: #e21331 !important;
+  --color-secondary-content: #ffffff !important;
+  --color-accent: #6b6bf5 !important;
+  --color-accent-content: #ffffff !important;
+  --color-neutral: #515c67 !important;
+  --color-neutral-content: rgba(255, 255, 255, 0.87) !important;
+
+  /* Status colors - VitePress palette (dark variants) */
+  --color-info: #2b4a73 !important;
+  --color-info-content: #ffffff !important;
+  --color-success: #3dd68c !important;
+  --color-success-content: #1b1b1f !important;
+  --color-warning: #fbbf24 !important;
+  --color-warning-content: #1b1b1f !important;
+  --color-error: #f66f81 !important;
+  --color-error-content: #1b1b1f !important;
+}
+
+/* ----------------------------------------
+   Dev Environment Light Theme
+   Vivid purple/magenta for clear visual distinction
+   ---------------------------------------- */
+html[data-theme="dev-light"],
+:root[data-theme="dev-light"],
+[data-theme="dev-light"] {
+  /* Base colors - noticeably purple-tinted */
+  --color-base-100: #f5f0ff !important;
+  --color-base-200: #ebe0ff !important;
+  --color-base-300: #d8c8f5 !important;
+  --color-base-content: #2d1f4e !important;
+
+  /* Primary colors - Vivid Purple */
+  --color-primary: #2b4a73 !important;
+  --color-primary-content: #ffffff !important;
+  --color-secondary: #db2777 !important;
+  --color-secondary-content: #ffffff !important;
+  --color-accent: #c026d3 !important;
+  --color-accent-content: #ffffff !important;
+  --color-neutral: #c4b5fd !important;
+  --color-neutral-content: #2d1f4e !important;
+
+  /* Status colors */
+  --color-info: #2b4a73 !important;
+  --color-info-content: #ffffff !important;
+  --color-success: #059669 !important;
+  --color-success-content: #ffffff !important;
+  --color-warning: #d97706 !important;
+  --color-warning-content: #ffffff !important;
+  --color-error: #dc2626 !important;
+  --color-error-content: #ffffff !important;
+}
+
+/* ----------------------------------------
+   Dev Environment Dark Theme
+   Vivid purple/magenta for clear visual distinction
+   ---------------------------------------- */
+html[data-theme="dev-dark"],
+:root[data-theme="dev-dark"],
+[data-theme="dev-dark"] {
+  /* Base colors - deep purple-tinted dark */
+  --color-base-100: #1e1033 !important;
+  --color-base-200: #150a24 !important;
+  --color-base-300: #2d1b4e !important;
+  --color-base-content: rgba(255, 255, 255, 0.92) !important;
+
+  /* Primary colors - Vivid Purple (dark variants) */
+  --color-primary: #2b4a73 !important;
+  --color-primary-content: #1e1033 !important;
+  --color-secondary: #f472b6 !important;
+  --color-secondary-content: #1e1033 !important;
+  --color-accent: #e879f9 !important;
+  --color-accent-content: #1e1033 !important;
+  --color-neutral: #5b4380 !important;
+  --color-neutral-content: rgba(255, 255, 255, 0.92) !important;
+
+  /* Status colors */
+  --color-info: #2b4a73 !important;
+  --color-info-content: #1e1033 !important;
+  --color-success: #34d399 !important;
+  --color-success-content: #1e1033 !important;
+  --color-warning: #fbbf24 !important;
+  --color-warning-content: #1e1033 !important;
+  --color-error: #fb7185 !important;
+  --color-error-content: #1e1033 !important;
+}
+
+/* Import DaisyUI themes referenced in code (globals.css selectors + Sidebar darkThemes) */
+@import "daisyui/theme/dracula.css";
+@import "daisyui/theme/business.css";
+@import "daisyui/theme/night.css";
+@import "daisyui/theme/coffee.css";
+@import "daisyui/theme/dim.css";
+@import "daisyui/theme/sunset.css";
+@import "daisyui/theme/abyss.css";
+
+/* ----------------------------------------
+   Login Page Styles - VitePress Hero Inspired
+   ---------------------------------------- */
+
+/* Login page background gradient - Light mode */
+.login-page-bg {
+  background: linear-gradient(
+    135deg,
+    #f8f9ff 0%,
+    #f0f1ff 25%,
+    #fff5f6 75%,
+    #fff 100%
+  );
+  position: relative;
+}
+
+.login-page-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(
+      ellipse at 20% 30%,
+      rgba(31, 31, 221, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 70%,
+      rgba(226, 19, 49, 0.06) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+/* Login page background gradient - Dark mode */
+[data-theme="dark"] .login-page-bg {
+  background: linear-gradient(
+    135deg,
+        #1d2530 0%,
+        #1d2530 60%,
+        #18202b 100%
+      );
+}
+
+[data-theme="dark"] .login-page-bg::before {
+  background:
+    radial-gradient(
+      ellipse at 20% 30%,
+      rgba(80, 140, 255, 0.14) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 70%,
+      rgba(40, 80, 140, 0.10) 0%,
+      transparent 50%
+    );
+}
+
+/* Login title gradient text - Light mode */
+.login-title-gradient {
+  background: linear-gradient(120deg, #1f1fdd 30%, #e21331 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Login title gradient text - Dark mode */
+[data-theme="dark"] .login-title-gradient {
+  background: linear-gradient(120deg, #2b4a73 30%, #f66f81 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Login page background gradient - Dev Light mode */
+[data-theme="dev-light"] .login-page-bg {
+  background: linear-gradient(
+    135deg,
+    #f5f0ff 0%,
+    #ebe0ff 25%,
+    #fce7f3 75%,
+    #f5f0ff 100%
+  );
+}
+
+[data-theme="dev-light"] .login-page-bg::before {
+  background:
+    radial-gradient(
+      ellipse at 20% 30%,
+      rgba(124, 58, 237, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 70%,
+      rgba(219, 39, 119, 0.12) 0%,
+      transparent 50%
+    );
+}
+
+/* Login title gradient text - Dev Light mode */
+[data-theme="dev-light"] .login-title-gradient {
+  background: linear-gradient(120deg, #2b4a73 30%, #db2777 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Login page background gradient - Dev Dark mode */
+[data-theme="dev-dark"] .login-page-bg {
+  background: linear-gradient(
+    135deg,
+    #1e1033 0%,
+    #2d1b4e 25%,
+    #2a1f3d 75%,
+    #1e1033 100%
+  );
+}
+
+[data-theme="dev-dark"] .login-page-bg::before {
+  background:
+    radial-gradient(
+      ellipse at 20% 30%,
+      rgba(167, 139, 250, 0.2) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 70%,
+      rgba(244, 114, 182, 0.15) 0%,
+      transparent 50%
+    );
+}
+
+/* Login title gradient text - Dev Dark mode */
+[data-theme="dev-dark"] .login-title-gradient {
+  background: linear-gradient(120deg, #2b4a73 30%, #f472b6 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ----------------------------------------
+   Page Title Gradient (Generic)
+   ---------------------------------------- */
+
+/* Subtle gradient for page titles - Light mode */
+.title-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-base-content) 0%,
+    var(--color-primary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle gradient for page titles - Dark mode */
+[data-theme="dark"] .title-gradient,
+[data-theme="night"] .title-gradient,
+[data-theme="dracula"] .title-gradient,
+[data-theme="dim"] .title-gradient,
+[data-theme="abyss"] .title-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    var(--color-primary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow button effect - Light mode */
+.btn-glow {
+  background: linear-gradient(135deg, #1f1fdd 0%, #3b3be8 100%);
+  border: none;
+  box-shadow:
+    0 4px 15px rgba(31, 31, 221, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-glow:hover:not(:disabled) {
+  background: linear-gradient(135deg, #3b3be8 0%, #5555f0 100%);
+  box-shadow:
+    0 6px 20px rgba(31, 31, 221, 0.4),
+    0 0 30px rgba(31, 31, 221, 0.2),
+    0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.btn-glow:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow:
+    0 2px 10px rgba(31, 31, 221, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Glow button effect - Dark mode */
+[data-theme="dark"] .btn-glow {
+  background: linear-gradient(135deg, #5555f0 0%, #6b6bf5 100%);
+  box-shadow:
+    0 4px 15px rgba(85, 85, 240, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .btn-glow:hover:not(:disabled) {
+  background: linear-gradient(135deg, #6b6bf5 0%, #8080f8 100%);
+  box-shadow:
+    0 6px 20px rgba(85, 85, 240, 0.5),
+    0 0 30px rgba(85, 85, 240, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .btn-glow:active:not(:disabled) {
+  box-shadow:
+    0 2px 10px rgba(85, 85, 240, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Glow button effect - Dev Light mode */
+[data-theme="dev-light"] .btn-glow {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  box-shadow:
+    0 4px 15px rgba(124, 58, 237, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dev-light"] .btn-glow:hover:not(:disabled) {
+  background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+  box-shadow:
+    0 6px 20px rgba(124, 58, 237, 0.5),
+    0 0 30px rgba(124, 58, 237, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dev-light"] .btn-glow:active:not(:disabled) {
+  box-shadow:
+    0 2px 10px rgba(124, 58, 237, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Glow button effect - Dev Dark mode */
+[data-theme="dev-dark"] .btn-glow {
+  background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+  box-shadow:
+    0 4px 15px rgba(167, 139, 250, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dev-dark"] .btn-glow:hover:not(:disabled) {
+  background: linear-gradient(135deg, #c4b5fd 0%, #ddd6fe 100%);
+  box-shadow:
+    0 6px 20px rgba(167, 139, 250, 0.6),
+    0 0 30px rgba(167, 139, 250, 0.4),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dev-dark"] .btn-glow:active:not(:disabled) {
+  box-shadow:
+    0 2px 10px rgba(167, 139, 250, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================
+   Status Animations & Effects
+   ======================================== */
+
+/* Pulse animation for active/running status */
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.status-pulse {
+  animation: status-pulse 2s ease-in-out infinite;
+}
+
+/* Glow effect for status indicators */
+@keyframes status-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 4px currentColor;
+  }
+  50% {
+    box-shadow:
+      0 0 12px currentColor,
+      0 0 20px currentColor;
+  }
+}
+
+.status-glow {
+  animation: status-glow 2s ease-in-out infinite;
+}
+
+/* Running status - combines pulse and color */
+.status-running {
+  animation: status-pulse 1.5s ease-in-out infinite;
+}
+
+.status-running::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(45deg, oklch(var(--p)), oklch(var(--s)));
+  opacity: 0;
+  animation: status-glow 1.5s ease-in-out infinite;
+  z-index: -1;
+}
+
+/* Success pulse - one-time animation */
+@keyframes success-pop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-success {
+  animation: success-pop 0.4s ease-out;
+}
+
+/* ========================================
+   Glass & Card Effects
+   ======================================== */
+
+/* Glass card effect */
+.card-glass {
+  background: oklch(var(--b2) / 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid oklch(var(--b3) / 0.5);
+}
+
+[data-theme="dark"] .card-glass,
+[data-theme="night"] .card-glass,
+[data-theme="dracula"] .card-glass,
+[data-theme="dim"] .card-glass,
+[data-theme="abyss"] .card-glass {
+  background: oklch(var(--b2) / 0.5);
+  border: 1px solid oklch(var(--b3) / 0.3);
+}
+
+/* Default card hover effect - subtle for all cards */
+.card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.card:hover {
+  box-shadow:
+    0 4px 12px -2px oklch(var(--bc) / 0.08),
+    0 2px 6px -2px oklch(var(--bc) / 0.04);
+}
+
+/* Card hover lift effect - more pronounced */
+.card-hover {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 25px -5px oklch(var(--bc) / 0.1),
+    0 4px 10px -5px oklch(var(--bc) / 0.05);
+}
+
+/* Interactive card - for clickable cards */
+.card-interactive {
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 20px -4px oklch(var(--bc) / 0.12),
+    0 4px 8px -4px oklch(var(--bc) / 0.06);
+  border-color: oklch(var(--p) / 0.3);
+}
+
+.card-interactive:active {
+  transform: translateY(0);
+}
+
+/* Static card - suppress hover shadow/transform effects */
+.card.card-no-hover:hover {
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  transform: none;
+}
+
+/* Hover: one-shot lift + border highlight */
+.float-hover {
+  transition:
+    translate 0.25s ease-out,
+    box-shadow 0.25s ease-out,
+    outline-color 0.2s ease;
+  outline: 1px solid transparent;
+  outline-offset: 1px;
+}
+
+.float-hover:hover,
+.float-hover:focus {
+  translate: 0 -4px;
+  box-shadow:
+    0 14px 24px -4px rgb(0 0 0 / 0.16),
+    0 6px 10px -4px rgb(0 0 0 / 0.1);
+  outline-color: color-mix(in oklch, var(--color-accent) 50%, transparent);
+}
+
+/* Gradient border for highlighted cards */
+.card-gradient-border {
+  position: relative;
+  background: oklch(var(--b1));
+}
+
+.card-gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, oklch(var(--p)), oklch(var(--s)));
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ========================================
+   Number/Value Transitions
+   ======================================== */
+
+.value-transition {
+  transition: all 0.3s ease-out;
+}
+
+/* ========================================
+   Page Transition Animations
+   ======================================== */
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes page-fade-in-fast {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.page-transition {
+  animation: page-fade-in 0.3s ease-out;
+}
+
+.page-transition-fast {
+  animation: page-fade-in-fast 0.2s ease-out;
+}
+
+/* Stagger animation for list items */
+@keyframes stagger-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-item {
+  animation: stagger-fade-in 0.4s ease-out backwards;
+}
+
+.stagger-item:nth-child(1) {
+  animation-delay: 0ms;
+}
+.stagger-item:nth-child(2) {
+  animation-delay: 50ms;
+}
+.stagger-item:nth-child(3) {
+  animation-delay: 100ms;
+}
+.stagger-item:nth-child(4) {
+  animation-delay: 150ms;
+}
+.stagger-item:nth-child(5) {
+  animation-delay: 200ms;
+}
+.stagger-item:nth-child(6) {
+  animation-delay: 250ms;
+}
+.stagger-item:nth-child(7) {
+  animation-delay: 300ms;
+}
+.stagger-item:nth-child(8) {
+  animation-delay: 350ms;
+}
+
+/* Modal animations */
+@keyframes modal-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-box {
+  animation: modal-slide-up 0.2s ease-out;
+}
+
+/* Login page floating logo animation */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow-light {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(31, 31, 221, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(31, 31, 221, 0.4))
+      drop-shadow(0 0 25px rgba(226, 19, 49, 0.2));
+  }
+}
+
+@keyframes glow-dark {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(85, 85, 240, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(85, 85, 240, 0.5))
+      drop-shadow(0 0 25px rgba(246, 111, 129, 0.3));
+  }
+}
+
+@keyframes glow-dev-light {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(124, 58, 237, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(124, 58, 237, 0.5))
+      drop-shadow(0 0 25px rgba(219, 39, 119, 0.3));
+  }
+}
+
+@keyframes glow-dev-dark {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 10px rgba(167, 139, 250, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 18px rgba(167, 139, 250, 0.6))
+      drop-shadow(0 0 30px rgba(244, 114, 182, 0.4));
+  }
+}
+
+.floating-logo {
+  animation:
+    float 4s ease-in-out infinite,
+    glow-light 3s ease-in-out infinite;
+}
+
+[data-theme="dark"] .floating-logo {
+  animation:
+    float 4s ease-in-out infinite,
+    glow-dark 3s ease-in-out infinite;
+}
+
+[data-theme="dev-light"] .floating-logo {
+  animation:
+    float 4s ease-in-out infinite,
+    glow-dev-light 3s ease-in-out infinite;
+}
+
+[data-theme="dev-dark"] .floating-logo {
+  animation:
+    float 4s ease-in-out infinite,
+    glow-dev-dark 3s ease-in-out infinite;
+}
+
+/* 404 Page - Lost logo animation */
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(10px, -5px) rotate(3deg);
+  }
+  50% {
+    transform: translate(-5px, 5px) rotate(-2deg);
+  }
+  75% {
+    transform: translate(-10px, -3px) rotate(2deg);
+  }
+}
+
+@keyframes pulse-fade {
+  0%,
+  100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 5px rgba(31, 31, 221, 0.2));
+  }
+  50% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 15px rgba(31, 31, 221, 0.3));
+  }
+}
+
+@keyframes pulse-fade-dark {
+  0%,
+  100% {
+    opacity: 0.6;
+    filter: drop-shadow(0 0 5px rgba(85, 85, 240, 0.3));
+  }
+  50% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 15px rgba(85, 85, 240, 0.4));
+  }
+}
+
+.not-found-logo {
+  animation:
+    drift 8s ease-in-out infinite,
+    pulse-fade 4s ease-in-out infinite;
+}
+
+[data-theme="dark"] .not-found-logo {
+  animation:
+    drift 8s ease-in-out infinite,
+    pulse-fade-dark 4s ease-in-out infinite;
+}
+
+/* Dashboard focus styles for hiding non-essential elements */
+.dashboard-focus-timeseries .col-span-3:first-of-type {
+  display: none; /* Hide parameter selection card */
+}
+.dashboard-focus-timeseries .col-span-3:last-of-type {
+  display: none; /* Hide data table */
+}
+.dashboard-focus-timeseries .col-span-3:nth-of-type(2) {
+  grid-column: span 1; /* Make plot take available width */
+}
+
+/* Improve plot sizing for dashboard */
+.dashboard-focus-timeseries .plotly-graph-div,
+.dashboard-focus-histogram .plotly-graph-div,
+.dashboard-focus-cdf .plotly-graph-div {
+  height: 350px !important;
+}
+
+/* Adjust margins for dashboard plots */
+.dashboard-focus-timeseries .js-plotly-plot,
+.dashboard-focus-histogram .js-plotly-plot,
+.dashboard-focus-cdf .js-plotly-plot {
+  margin: 0 !important;
+}
+
+/* Ensure plot containers take full available space */
+.dashboard-focus-timeseries,
+.dashboard-focus-histogram,
+.dashboard-focus-cdf {
+  height: 100%;
+}
+
+.dashboard-focus-timeseries > div,
+.dashboard-focus-histogram > div,
+.dashboard-focus-cdf > div {
+  height: 100%;
+}
+
+.dashboard-focus-histogram .grid-cols-12 > .col-span-4:first-child {
+  display: none; /* Hide parameter selection */
+}
+.dashboard-focus-histogram .grid-cols-12 > .col-span-8 {
+  grid-column: span 12; /* Make plot take full width */
+}
+.dashboard-focus-histogram .card.bg-base-100.shadow-md {
+  display: none; /* Hide data table */
+}
+
+.dashboard-focus-cdf .grid-cols-12 > .col-span-4:first-child {
+  display: none; /* Hide parameter selection */
+}
+.dashboard-focus-cdf .grid-cols-12 > .col-span-8 {
+  grid-column: span 12; /* Make plot take full width */
+}
+.dashboard-focus-cdf .card.bg-base-100.shadow-md {
+  display: none; /* Hide data table */
+}
+
+/* Dashboard focus styles for chip page */
+.dashboard-focus-chip {
+  /* Reduce padding for dashboard view */
+  padding: 1rem;
+}
+
+.dashboard-focus-chip > div {
+  /* Reduce space between sections */
+  gap: 1rem;
+}
+
+/* Hide or minimize certain elements for dashboard view */
+.dashboard-focus-chip .space-y-6 {
+  /* Reduce spacing */
+  gap: 1rem;
+}
+
+.dashboard-focus-chip h1 {
+  /* Smaller title for dashboard */
+  font-size: 1.5rem;
+}
+
+/* Optimize content area for dashboard */
+.dashboard-focus-chip .pt-4 {
+  padding-top: 0.5rem;
+}
+
+/* Dashboard focus styles for execution page */
+.dashboard-focus-execution {
+  /* Reduce padding for dashboard view */
+  padding: 1rem;
+}
+
+.dashboard-focus-execution .px-10 {
+  /* Reduce horizontal padding */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.dashboard-focus-execution h1 {
+  /* Smaller title for dashboard */
+  font-size: 1.5rem;
+}
+
+/* Hide execution stats section in dashboard view */
+.dashboard-focus-execution .pb-6:has(.flex.gap-4) {
+  display: none;
+}
+
+/* ----------------------------------------
+   React-Select Theme Integration
+   Applies DaisyUI theme colors to react-select
+   ---------------------------------------- */
+
+/* Control (main input container) */
+.css-13cymwt-control,
+.css-t3ipsp-control,
+[class$="-control"] {
+  background-color: var(--color-base-100) !important;
+  border-color: var(--color-base-300) !important;
+  min-height: 2.5rem !important;
+}
+
+[class$="-control"]:hover {
+  border-color: var(--color-primary) !important;
+}
+
+/* Focused state */
+.css-t3ipsp-control,
+[class$="-control"]:focus-within {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 1px var(--color-primary) !important;
+}
+
+/* Menu (dropdown) */
+.css-1nmdiq5-menu,
+[class$="-menu"] {
+  background-color: var(--color-base-100) !important;
+  border: 1px solid var(--color-base-300) !important;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  z-index: 50 !important;
+}
+
+/* Menu list */
+.css-1n6sfyn-MenuList,
+[class$="-MenuList"] {
+  padding: 0.25rem !important;
+}
+
+/* Options */
+.css-d7l1ni-option,
+.css-tr4s17-option,
+[class$="-option"] {
+  background-color: transparent !important;
+  color: var(--color-base-content) !important;
+  cursor: pointer !important;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 0.25rem !important;
+}
+
+/* Option hover */
+.css-d7l1ni-option:hover,
+[class$="-option"]:hover {
+  background-color: var(--color-base-200) !important;
+}
+
+/* Option focused (keyboard navigation) */
+.css-d7l1ni-option,
+[class$="-option"][class*="focused"] {
+  background-color: var(--color-base-200) !important;
+}
+
+/* Option selected */
+.css-tr4s17-option,
+[class$="-option"][class*="selected"] {
+  background-color: var(--color-primary) !important;
+  color: var(--color-primary-content) !important;
+}
+
+/* Single value (selected text) */
+.css-1dimb5e-singleValue,
+[class$="-singleValue"] {
+  color: var(--color-base-content) !important;
+}
+
+/* Placeholder */
+.css-1jqq78o-placeholder,
+[class$="-placeholder"] {
+  color: var(--color-base-content) !important;
+  opacity: 0.5 !important;
+}
+
+/* Input */
+.css-1hac4vs-Input,
+[class$="-Input"] input {
+  color: var(--color-base-content) !important;
+}
+
+/* Dropdown indicator */
+.css-1xc3v61-indicatorContainer,
+.css-15lsz6c-indicatorContainer,
+[class$="-indicatorContainer"] {
+  color: var(--color-base-content) !important;
+  opacity: 0.5 !important;
+}
+
+[class$="-indicatorContainer"]:hover {
+  color: var(--color-base-content) !important;
+  opacity: 0.8 !important;
+}
+
+/* Clear indicator */
+.css-1u9des2-indicatorSeparator,
+[class$="-indicatorSeparator"] {
+  background-color: var(--color-base-300) !important;
+}
+
+/* Multi-value (tags) */
+.css-12a83d4-MultiValueGeneric,
+[class$="-multiValue"] {
+  background-color: var(--color-base-200) !important;
+  border-radius: 0.25rem !important;
+}
+
+[class$="-multiValue"] > div:first-child {
+  color: var(--color-base-content) !important;
+}
+
+/* Multi-value remove button */
+.css-12a83d4-MultiValueRemove,
+[class$="-MultiValueRemove"] {
+  color: var(--color-base-content) !important;
+  opacity: 0.7 !important;
+}
+
+[class$="-MultiValueRemove"]:hover {
+  background-color: var(--color-error) !important;
+  color: var(--color-error-content) !important;
+}
+
+/* No options message */
+.css-1n7v3ny-noOptions,
+[class$="-noOptions"] {
+  color: var(--color-base-content) !important;
+  opacity: 0.6 !important;
+}
+
+/* Loading message */
+.css-1cfo1cf-loadingMessage,
+[class$="-loadingMessage"] {
+  color: var(--color-base-content) !important;
+  opacity: 0.6 !important;
+}
+
+/* Group heading */
+.css-1tkfr4s-group,
+[class$="-group"] > div:first-child {
+  color: var(--color-base-content) !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  text-transform: uppercase !important;
+  opacity: 0.7 !important;
+}
+
+/* ========================================
+   Quantum Loader Animation
+   ======================================== */
+
+@keyframes quantum-orbit {
+  0% {
+    transform: rotate(0deg) translateX(20px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(20px) rotate(-360deg);
+  }
+}
+
+@keyframes quantum-orbit-reverse {
+  0% {
+    transform: rotate(0deg) translateX(16px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg) translateX(16px) rotate(360deg);
+  }
+}
+
+@keyframes quantum-core-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 10px var(--color-primary),
+      0 0 20px color-mix(in oklch, var(--color-primary) 50%, transparent);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow:
+      0 0 15px var(--color-primary),
+      0 0 30px color-mix(in oklch, var(--color-primary) 60%, transparent),
+      0 0 40px color-mix(in oklch, var(--color-secondary) 30%, transparent);
+  }
+}
+
+.quantum-loader {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.quantum-loader-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  border-radius: 50%;
+  animation: quantum-core-pulse 2s ease-in-out infinite;
+}
+
+.quantum-loader-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+}
+
+.quantum-loader-orbit-1 {
+  background: var(--color-primary);
+  animation: quantum-orbit 1.5s linear infinite;
+  box-shadow: 0 0 8px var(--color-primary);
+}
+
+.quantum-loader-orbit-2 {
+  background: var(--color-secondary);
+  animation: quantum-orbit-reverse 2s linear infinite;
+  box-shadow: 0 0 8px var(--color-secondary);
+}
+
+.quantum-loader-orbit-3 {
+  background: var(--color-accent);
+  animation: quantum-orbit 2.5s linear infinite;
+  animation-delay: 0.5s;
+  box-shadow: 0 0 8px var(--color-accent);
+}
+
+/* Quantum trail effect */
+.quantum-loader-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid transparent;
+  border-top-color: color-mix(in oklch, var(--color-primary) 40%, transparent);
+  border-radius: 50%;
+  animation: quantum-orbit 3s linear infinite;
+}
+
+.quantum-loader-ring:nth-child(2) {
+  border-top-color: color-mix(
+    in oklch,
+    var(--color-secondary) 30%,
+    transparent
+  );
+  animation-duration: 2.5s;
+  animation-direction: reverse;
+}
+
+/* ========================================
+   Chat UI Styles
+   ======================================== */
+
+/* User message bubble - uses primary gradient consistent with btn-primary */
+.chat-bubble-user {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    color-mix(in oklch, var(--color-primary) 80%, var(--color-accent))
+  );
+  color: var(--color-primary-content);
+}
+
+/* Bot avatar icon background */
+.chat-avatar-bot {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklch, var(--color-primary) 12%, transparent),
+    color-mix(in oklch, var(--color-accent) 8%, transparent)
+  );
+  border: 1px solid color-mix(in oklch, var(--color-primary) 15%, transparent);
+}
+
+/* Active session in sidebar */
+.chat-session-active {
+  background: color-mix(in oklch, var(--color-primary) 8%, transparent);
+  border: 1px solid color-mix(in oklch, var(--color-primary) 20%, transparent);
+  box-shadow: 0 0 0 1px
+    color-mix(in oklch, var(--color-primary) 5%, transparent);
+}
+
+/* Input card container */
+.chat-input-card {
+  background: var(--color-base-100);
+  border: 2px solid var(--color-base-300);
+  border-radius: 1rem;
+  padding: 0.25rem 0.75rem;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.3s ease;
+}
+
+.chat-input-card:focus-within {
+  border-color: var(--color-primary);
+  box-shadow:
+    0 0 0 4px color-mix(in oklch, var(--color-primary) 15%, transparent),
+    0 4px 12px -2px rgb(0 0 0 / 0.08);
+}
+
+/* Suggestion cards in empty state */
+.chat-suggestion-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid
+    color-mix(in oklch, var(--color-base-content) 10%, transparent);
+  background: var(--color-base-100);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+}
+
+.chat-suggestion-card:hover {
+  border-color: color-mix(in oklch, var(--color-primary) 30%, transparent);
+  background: color-mix(
+    in oklch,
+    var(--color-primary) 3%,
+    var(--color-base-100)
+  );
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.07),
+    0 0 0 1px color-mix(in oklch, var(--color-primary) 10%, transparent);
+  transform: translateY(-1px);
+}
+
+/* Fade-in-up animation for new messages */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.3s ease-out;
+}
