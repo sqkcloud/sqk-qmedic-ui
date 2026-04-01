@@ -1,0 +1,27 @@
+{
+  "pages": {
+    "/(auth)/issues/[issueId]/page": [
+      "static/chunks/652dc030556a467c.css",
+      "static/chunks/bd762047d9a22b65.js",
+      "static/chunks/692e4656547a18cf.js",
+      "static/chunks/0bce849b926de6fc.js",
+      "static/chunks/393480430421138b.js",
+      "static/chunks/4ccbe5f17d31ce48.js",
+      "static/chunks/2532f69a4166d704.js",
+      "static/chunks/426f24a345c93ba3.js",
+      "static/chunks/01478acb715b4a1a.js",
+      "static/chunks/a38bcdf2ef9603a3.js",
+      "static/chunks/fec55895cd07d276.js",
+      "static/chunks/afbbafeabe4b5cbe.js",
+      "static/chunks/a337817409a12d22.js",
+      "static/chunks/09033dbea8ecd97a.js",
+      "static/chunks/022bca9e75248104.js",
+      "static/chunks/ec84efa41c90c5d0.js",
+      "static/chunks/33d3659ffc03c90f.js",
+      "static/chunks/d7dabadf1e8a079a.js",
+      "static/chunks/91a60b0b112b10b3.js",
+      "static/chunks/b0f20018278cdeba.js",
+      "static/chunks/turbopack-30dc989b566fe713.js"
+    ]
+  }
+}

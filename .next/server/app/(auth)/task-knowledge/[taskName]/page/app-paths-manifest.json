@@ -1,0 +1,3 @@
+{
+  "/(auth)/task-knowledge/[taskName]/page": "app/(auth)/task-knowledge/[taskName]/page.js"
+}

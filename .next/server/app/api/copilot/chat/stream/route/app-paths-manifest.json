@@ -1,0 +1,3 @@
+{
+  "/api/copilot/chat/stream/route": "app/api/copilot/chat/stream/route.js"
+}

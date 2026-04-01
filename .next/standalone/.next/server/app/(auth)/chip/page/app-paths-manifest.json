@@ -1,0 +1,3 @@
+{
+  "/(auth)/chip/page": "app/(auth)/chip/page.js"
+}

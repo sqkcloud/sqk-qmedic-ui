@@ -1,0 +1,3 @@
+module.exports=[218779,a=>{"use strict";a.s(["GoBackButton",()=>c]);var b=a.i(187924);function c(){return(0,b.jsxs)("button",{onClick:()=>window.history.back(),className:"btn btn-outline btn-primary px-8",children:[(0,b.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",className:"h-5 w-5 mr-2",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:(0,b.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M11 17l-5-5m0 0l5-5m-5 5h12"})}),"Go Back"]})}}];
+
+//# sourceMappingURL=src_components_ui_GoBackButton_tsx_3752d0f0._.js.map

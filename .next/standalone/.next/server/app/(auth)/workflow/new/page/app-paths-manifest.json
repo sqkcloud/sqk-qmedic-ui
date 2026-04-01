@@ -1,0 +1,3 @@
+{
+  "/(auth)/workflow/new/page": "app/(auth)/workflow/new/page.js"
+}

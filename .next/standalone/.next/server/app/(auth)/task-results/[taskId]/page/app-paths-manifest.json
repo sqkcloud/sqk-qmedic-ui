@@ -1,0 +1,3 @@
+{
+  "/(auth)/task-results/[taskId]/page": "app/(auth)/task-results/[taskId]/page.js"
+}

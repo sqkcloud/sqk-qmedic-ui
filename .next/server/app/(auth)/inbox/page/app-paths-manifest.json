@@ -1,0 +1,3 @@
+{
+  "/(auth)/inbox/page": "app/(auth)/inbox/page.js"
+}
