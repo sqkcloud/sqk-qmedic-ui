@@ -8,8 +8,11 @@ import { LogoMark } from '@/components/branding/LogoMark';
 export function Topbar() {
   const router = useRouter();
 
-  function handleLogout() {
-    document.cookie = 'sqk_session=; Max-Age=0; path=/';
+  async function handleLogout() {
+    await fetch('/api/logout', {
+      method: 'POST',
+    });
+
     router.replace('/login');
     router.refresh();
   }
@@ -22,12 +25,12 @@ export function Topbar() {
       <div className="flex items-center gap-3">
         <Link href="/ohifview" prefetch={false} className="hidden items-center gap-2 rounded-xl border border-cyan-300/30 bg-cyan-400/10 px-3 py-2 text-sm text-cyan-100 transition hover:bg-cyan-400/20 md:inline-flex">OHIF View</Link>
         <div className="hidden text-right md:block">
-          <div className="text-sm font-medium text-white">SQK dcm4chee Migration Console</div>
-          <div className="text-xs text-mutedText">Archive, study, monitoring, and configuration workflows</div>
+          <div className="text-sm font-medium text-white">SQK QMedic</div>
+          <div className="text-xs text-mutedText">Quantum, CT, and MRI pipeline</div>
         </div>
         <div className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white">
           <FolderClosed size={16} />
-          DCM4CHEE / DEV
+          QMedic / 2026
         </div>
         <button
           type="button"
