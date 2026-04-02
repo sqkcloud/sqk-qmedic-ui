@@ -1,7 +1,5 @@
 {
-  "/api/login/route": "app/api/login/route.js",
-  "/login/page": "app/login/page.js",
-  "/(console)/inbox/page": "app/(console)/inbox/page.js",
-  "/(console)/patients/page": "app/(console)/patients/page.js",
-  "/(console)/ohifview/page": "app/(console)/ohifview/page.js"
+  "/(console)/ohifview/worklist/page": "app/(console)/ohifview/worklist/page.js",
+  "/(console)/ohifview/page": "app/(console)/ohifview/page.js",
+  "/(console)/ohifview/viewport/page": "app/(console)/ohifview/viewport/page.js"
 }

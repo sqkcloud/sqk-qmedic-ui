@@ -58,7 +58,7 @@ export default function OhifViewLanding() {
       />
 
       <PanelCard
-        title="OHIF (proxied)"
+        title=""
         right={
           <div className="flex items-center gap-2">
             <button
@@ -81,14 +81,14 @@ export default function OhifViewLanding() {
           </div>
         }
       >
-        <div className="mb-3 flex flex-wrap items-center justify-between gap-3 text-xs text-mutedText">
+        {/* <div className="mb-3 flex flex-wrap items-center justify-between gap-3 text-xs text-mutedText">
           <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
             Proxy path: <span className="text-white">{viewerBase}</span>
           </div>
           <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
             Selected StudyInstanceUID: <span className="text-white">{studyUID || 'none (Study List mode)'}</span>
           </div>
-        </div>
+        </div> */}
 
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-black">
           <iframe
