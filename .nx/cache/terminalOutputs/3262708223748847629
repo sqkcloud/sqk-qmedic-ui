@@ -1,0 +1,29 @@
+[0m[2m[35m$[0m [2m[1mbun run dev[0m
+[0m[2m[35m$[0m [2m[1mcross-env NODE_ENV=development webpack serve --config .webpack/webpack.pwa.js[0m
+[webpack-cli] [31mFailed to load '/Users/lucas/aiworkspace/sqk-qmedic-ui/platform/app/.webpack/webpack.pwa.js' config[39m
+[webpack-cli] [31mError: Cannot find module './../../../.webpack/webpack.base.js'
+Require stack:
+- /Users/lucas/aiworkspace/sqk-qmedic-ui/platform/app/.webpack/webpack.pwa.js
+- /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/webpack-cli/lib/webpack-cli.js
+- /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/webpack-cli/lib/bootstrap.js
+- /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/webpack-cli/bin/cli.js
+- /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/webpack/bin/webpack.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1212:15)
+    at Module._load (node:internal/modules/cjs/loader:1043:27)
+    at Module.require (node:internal/modules/cjs/loader:1298:19)
+    at require (node:internal/modules/helpers:182:18)
+    at Object.<anonymous> (/Users/lucas/aiworkspace/sqk-qmedic-ui/platform/app/.webpack/webpack.pwa.js:6:21)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
+    at Module.load (node:internal/modules/cjs/loader:1275:32)
+    at Module._load (node:internal/modules/cjs/loader:1096:12)
+    at Module.require (node:internal/modules/cjs/loader:1298:19) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/lucas/aiworkspace/sqk-qmedic-ui/platform/app/.webpack/webpack.pwa.js',
+    '/Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/webpack-cli/lib/webpack-cli.js',
+    '/Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/webpack-cli/lib/bootstrap.js',
+    '/Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/webpack-cli/bin/cli.js',
+    '/Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/webpack/bin/webpack.js'
+  ]
+}[39m

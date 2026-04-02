@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "lerna run dev:viewer --stream",
+    "startTime": "2026-04-01T16:06:28.613Z",
+    "endTime": "2026-04-01T16:06:29.295Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "@ohif/app:dev:viewer",
+      "target": "dev:viewer",
+      "projectName": "@ohif/app",
+      "hash": "3262708223748847629",
+      "startTime": "2026-04-01T16:06:28.660Z",
+      "endTime": "2026-04-01T16:06:29.294Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    }
+  ]
+}

@@ -1,0 +1,454 @@
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:31.002Z - [Client] Starting new daemon server in background
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:31.004Z - [Client] Waiting for server (max: 6000 attempts, 10ms interval)
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.083Z - New daemon starting from: /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/nx/src/daemon/server/server.js
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.083Z - New daemon __dirname: /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/nx/src/daemon/server
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.083Z - New daemon nxVersion: 22.5.2
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.084Z - New daemon getInstalledNxVersion(): 22.5.2
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.084Z - [Server] Starting outdated check interval (20ms)
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.086Z - Started listening on: /private/var/folders/9w/62l_llr54tbgcdjzmp3fnghw0000gn/T/8d5161a71c8585fcee19/d.sock
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.088Z - [WATCHER]: Subscribed to changes within: /Users/lucas/aiworkspace/sqk-qmedic-ui (native)
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.088Z - [NX-CONSOLE]: Pulling latest Nx (latest) to check console status...
+Fetching nx...
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:31.097Z - [Client] Server available after 8 attempts
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:31.097Z - [Client] Daemon server started, pid=25807
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:31.097Z - [Messenger] Setting up socket listeners
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:31.097Z - [Messenger] listen() complete
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:31.097Z - [Messenger] Sending message type: REQUEST_PROJECT_GRAPH
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:31.097Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.134Z - Established a connection. Number of open connections: 1
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.135Z - Established a connection. Number of open connections: 2
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.136Z - Closed a connection. Number of open connections: 1
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.136Z - Received raw message of length 32
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.136Z - Received json message of type REQUEST_PROJECT_GRAPH
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.137Z - [REQUEST]: Client Request for Project Graph Received
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.564Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.564Z - [REQUEST]: 
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.564Z - [REQUEST]: 
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.565Z - No files changed, but no in-memory cached project graph found. Recomputing it...
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.802Z - [SYNC]: collect registered sync generators
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.812Z - Wrote project graph cache to /Users/lucas/aiworkspace/sqk-qmedic-ui/.nx/workspace-data/project-graph.json
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.812Z - Serializing response for REQUEST_PROJECT_GRAPH message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.812Z - Responding to REQUEST_PROJECT_GRAPH message
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.812Z - [REQUEST]: Responding to the client. project-graph
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.814Z - Time taken for 'total for creating and serializing project graph' 675.603ms
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:31.815Z - [NX-CONSOLE]: Successfully pulled latest Nx to /private/var/folders/9w/62l_llr54tbgcdjzmp3fnghw0000gn/T/tmp-25807-JvJIkExqJFCa
+[NX v22.6.3 Daemon Server] - 2026-04-01T12:08:32.260Z - [NX-CONSOLE]: Using local implementation (NX_USE_LOCAL=true or inner call)
+DEBUG nx::native::ide::install: Detected editor: Unknown
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.262Z - [NX-CONSOLE]: Console status check completed, shouldPrompt: false
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.263Z - Done responding to the client project-graph
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.264Z - Handled json message REQUEST_PROJECT_GRAPH. Handling time: 675. Response time: 452.
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.264Z - [Messenger] Received message, length: 2040382
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.271Z - [Messenger] Sending message type: GET_CONTEXT_FILE_DATA
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.271Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.271Z - Received raw message of length 32
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.271Z - Received json message of type GET_CONTEXT_FILE_DATA
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.274Z - Serializing response for GET_CONTEXT_FILE_DATA message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.275Z - Responding to GET_CONTEXT_FILE_DATA message
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.275Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.275Z - Done responding to the client handleContextFileData
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.275Z - Handled json message GET_CONTEXT_FILE_DATA. Handling time: 3. Response time: 1.
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.275Z - [Messenger] Received message, length: 507588
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.396Z - [Messenger] Sending message type: REQUEST_PROJECT_GRAPH
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.396Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.396Z - Received raw message of length 32
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.396Z - Received json message of type REQUEST_PROJECT_GRAPH
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.396Z - [REQUEST]: Client Request for Project Graph Received
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.396Z - Reusing in-memory cached project graph because no files changed.
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.405Z - Wrote project graph cache to /Users/lucas/aiworkspace/sqk-qmedic-ui/.nx/workspace-data/project-graph.json
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.405Z - Serializing response for REQUEST_PROJECT_GRAPH message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.405Z - Responding to REQUEST_PROJECT_GRAPH message
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.405Z - [REQUEST]: Responding to the client. project-graph
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.407Z - Time taken for 'total for creating and serializing project graph' 8.878583000000162ms
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.409Z - Done responding to the client project-graph
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.409Z - Handled json message REQUEST_PROJECT_GRAPH. Handling time: 9. Response time: 4.
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.410Z - [Messenger] Received message, length: 2040382
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.417Z - [Messenger] Sending message type: PRE_TASKS_EXECUTION
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.417Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.417Z - Received raw message of length 1225
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.417Z - Received json message of type PRE_TASKS_EXECUTION
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.418Z - Serializing response for PRE_TASKS_EXECUTION message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.418Z - Responding to PRE_TASKS_EXECUTION message
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.418Z - [REQUEST]: Responding to the client. handleRunPreTasksExecution
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.418Z - Done responding to the client handleRunPreTasksExecution
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.418Z - Handled json message PRE_TASKS_EXECUTION. Handling time: 1. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.418Z - [Messenger] Received message, length: 2
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.418Z - Time taken for 'preTasksExecution' 0.37983299999996234ms
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.438Z - [Messenger] Sending message type: HASH_TASKS
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.438Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.438Z - Received raw message of length 15627
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.438Z - Received json message of type HASH_TASKS
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.438Z - Reusing in-memory cached project graph because no files changed.
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.447Z - Wrote project graph cache to /Users/lucas/aiworkspace/sqk-qmedic-ui/.nx/workspace-data/project-graph.json
+DEBUG nx::native::tasks::hash_planner: get_plans_internal COMPLETED in 2.84175ms - processed 1 tasks (setup: 2.066666ms, parallel_planning: 774.792µs)
+DEBUG nx::native::tasks::hashers::hash_workspace_files: Hashing workspace fileset with inputs: Adding "15650560168873631181" (".gitignore") to hash
+DEBUG nx::native::tasks::hashers::hash_workspace_files: Hashing workspace fileset with inputs: Adding "12717551077928321195" ("nx.json") to hash
+DEBUG nx::native::tasks::hashers::hash_workspace_files: Hashing workspace fileset with inputs: Hash Value: "9170483766122669532"
+DEBUG nx::native::tasks::task_hasher: hash_plans COMPLETED in 3.412541ms - processed 1 plans (setup: 449.416µs, hashing: 2.963ms, assembly: 421.834µs)
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.463Z - Serializing response for HASH_TASKS message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.463Z - Responding to HASH_TASKS message
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.463Z - [REQUEST]: Responding to the client. handleHashTasks
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.463Z - Time taken for 'write cache' 8.469666000000188ms
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.464Z - Done responding to the client handleHashTasks
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.464Z - Handled json message HASH_TASKS. Handling time: 25. Response time: 1.
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.464Z - [Messenger] Received message, length: 229998
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.493Z - [Messenger] Sending message type: GET_ESTIMATED_TASK_TIMINGS
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.493Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.493Z - Received raw message of length 95
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.493Z - Received json message of type GET_ESTIMATED_TASK_TIMINGS
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.507Z - Serializing response for GET_ESTIMATED_TASK_TIMINGS message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.507Z - Responding to GET_ESTIMATED_TASK_TIMINGS message
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.507Z - [REQUEST]: Responding to the client. handleGetEstimatedTaskTimings
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.507Z - Done responding to the client handleGetEstimatedTaskTimings
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:32.507Z - Handled json message GET_ESTIMATED_TASK_TIMINGS. Handling time: 14. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:32.507Z - [Messenger] Received message, length: 2
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:33.224Z - [Messenger] Sending message type: RECORD_OUTPUTS_HASH
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:33.224Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.224Z - Received raw message of length 81
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.224Z - Received json message of type RECORD_OUTPUTS_HASH
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.224Z - Serializing response for RECORD_OUTPUTS_HASH message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.224Z - Responding to RECORD_OUTPUTS_HASH message
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.224Z - [REQUEST]: Responding to the client. recordOutputsHash
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.224Z - Done responding to the client recordOutputsHash
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.224Z - Handled json message RECORD_OUTPUTS_HASH. Handling time: 0. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:33.224Z - [Messenger] Received message, length: 2
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:33.225Z - [Messenger] Sending message type: RECORD_TASK_RUNS
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:33.225Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.225Z - Received raw message of length 214
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.225Z - Received json message of type RECORD_TASK_RUNS
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.225Z - Serializing response for RECORD_TASK_RUNS message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.225Z - Responding to RECORD_TASK_RUNS message
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.225Z - [REQUEST]: Responding to the client. handleRecordTaskRuns
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.225Z - Done responding to the client handleRecordTaskRuns
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.225Z - Handled json message RECORD_TASK_RUNS. Handling time: 0. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:33.225Z - [Messenger] Received message, length: 4
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:33.226Z - [Messenger] Sending message type: POST_TASKS_EXECUTION
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:33.226Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.226Z - Received raw message of length 68522
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.227Z - Received json message of type POST_TASKS_EXECUTION
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.227Z - Serializing response for POST_TASKS_EXECUTION message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.227Z - Responding to POST_TASKS_EXECUTION message
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.227Z - [REQUEST]: Responding to the client. handleRunPostTasksExecution
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.227Z - Done responding to the client handleRunPostTasksExecution
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.227Z - Handled json message POST_TASKS_EXECUTION. Handling time: 0. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T12:08:33.227Z - [Messenger] Received message, length: 4
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.227Z - Time taken for 'postTasksExecution' 0.07766700000001947ms
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:08:33.231Z - Closed a connection. Number of open connections: 0
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:44:18.929Z - [Server] Daemon outdated: NX_VERSION_CHANGED
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:44:18.929Z - [Server] Shutting down daemon (no restart)...
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:44:18.931Z - [WATCHER]: Stopping the watcher for /Users/lucas/aiworkspace/sqk-qmedic-ui (sources)
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:44:18.931Z - [WATCHER]: Stopping the watcher for /Users/lucas/aiworkspace/sqk-qmedic-ui (outputs)
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:44:18.936Z - [NX-CONSOLE]: Cleaning up latest Nx installation from /private/var/folders/9w/62l_llr54tbgcdjzmp3fnghw0000gn/T/tmp-25807-JvJIkExqJFCa
+[NX v22.5.2 Daemon Server] - 2026-04-01T12:44:18.937Z - Server stopped because: "NX_VERSION_CHANGED"
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:06.693Z - [Client] Starting new daemon server in background
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:06.695Z - [Client] Waiting for server (max: 6000 attempts, 10ms interval)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.777Z - New daemon starting from: /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/nx/src/daemon/server/server.js
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.777Z - New daemon __dirname: /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/nx/src/daemon/server
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.777Z - New daemon nxVersion: 22.5.2
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.778Z - New daemon getInstalledNxVersion(): 22.5.2
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.778Z - [Server] Starting outdated check interval (20ms)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.779Z - Started listening on: /private/var/folders/9w/62l_llr54tbgcdjzmp3fnghw0000gn/T/e003dfe93b735617bcbb/d.sock
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.782Z - [WATCHER]: Subscribed to changes within: /Users/lucas/aiworkspace/sqk-qmedic-ui (native)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.783Z - [NX-CONSOLE]: Pulling latest Nx (latest) to check console status...
+Fetching nx...
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:06.786Z - [Client] Server available after 8 attempts
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:06.786Z - [Client] Daemon server started, pid=67319
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:06.786Z - [Messenger] Setting up socket listeners
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:06.786Z - [Messenger] listen() complete
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:06.786Z - [Messenger] Sending message type: REQUEST_PROJECT_GRAPH
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:06.786Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.835Z - Established a connection. Number of open connections: 1
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.835Z - Established a connection. Number of open connections: 2
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.836Z - Closed a connection. Number of open connections: 1
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.836Z - Received raw message of length 32
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.836Z - Received json message of type REQUEST_PROJECT_GRAPH
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.836Z - [REQUEST]: Client Request for Project Graph Received
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.845Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.845Z - [REQUEST]: 
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.845Z - [REQUEST]: 
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.846Z - No files changed, but no in-memory cached project graph found. Recomputing it...
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.922Z - [SYNC]: collect registered sync generators
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.931Z - Wrote project graph cache to /Users/lucas/aiworkspace/sqk-qmedic-ui/.nx/workspace-data/project-graph.json
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.931Z - Serializing response for REQUEST_PROJECT_GRAPH message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.931Z - Responding to REQUEST_PROJECT_GRAPH message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.931Z - [REQUEST]: Responding to the client. project-graph
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.931Z - Time taken for 'total for creating and serializing project graph' 94.62841700000001ms
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.934Z - Done responding to the client project-graph
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.935Z - Handled json message REQUEST_PROJECT_GRAPH. Handling time: 95. Response time: 4.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:06.935Z - [Messenger] Received message, length: 2040382
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:06.942Z - [Messenger] Sending message type: GET_CONTEXT_FILE_DATA
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:06.942Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.942Z - Received raw message of length 32
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.942Z - Received json message of type GET_CONTEXT_FILE_DATA
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.945Z - Serializing response for GET_CONTEXT_FILE_DATA message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.946Z - Responding to GET_CONTEXT_FILE_DATA message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.946Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.947Z - Done responding to the client handleContextFileData
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:06.947Z - Handled json message GET_CONTEXT_FILE_DATA. Handling time: 3. Response time: 2.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:06.947Z - [Messenger] Received message, length: 507588
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.072Z - [Messenger] Sending message type: REQUEST_PROJECT_GRAPH
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.072Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.072Z - Received raw message of length 32
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.072Z - Received json message of type REQUEST_PROJECT_GRAPH
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.072Z - [REQUEST]: Client Request for Project Graph Received
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.072Z - Reusing in-memory cached project graph because no files changed.
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.079Z - Wrote project graph cache to /Users/lucas/aiworkspace/sqk-qmedic-ui/.nx/workspace-data/project-graph.json
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.079Z - Serializing response for REQUEST_PROJECT_GRAPH message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.079Z - Responding to REQUEST_PROJECT_GRAPH message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.079Z - [REQUEST]: Responding to the client. project-graph
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.080Z - Time taken for 'total for creating and serializing project graph' 7.288083000000029ms
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.083Z - Done responding to the client project-graph
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.083Z - Handled json message REQUEST_PROJECT_GRAPH. Handling time: 7. Response time: 4.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.083Z - [Messenger] Received message, length: 2040382
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.091Z - [Messenger] Sending message type: PRE_TASKS_EXECUTION
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.091Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.091Z - Received raw message of length 1224
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.091Z - Received json message of type PRE_TASKS_EXECUTION
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.091Z - Serializing response for PRE_TASKS_EXECUTION message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.091Z - Responding to PRE_TASKS_EXECUTION message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.091Z - [REQUEST]: Responding to the client. handleRunPreTasksExecution
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.091Z - Done responding to the client handleRunPreTasksExecution
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.091Z - Handled json message PRE_TASKS_EXECUTION. Handling time: 0. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.091Z - [Messenger] Received message, length: 2
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.092Z - Time taken for 'preTasksExecution' 0.3199999999999932ms
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.115Z - [Messenger] Sending message type: HASH_TASKS
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.115Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.115Z - Received raw message of length 15626
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.115Z - Received json message of type HASH_TASKS
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.115Z - Reusing in-memory cached project graph because no files changed.
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.122Z - Wrote project graph cache to /Users/lucas/aiworkspace/sqk-qmedic-ui/.nx/workspace-data/project-graph.json
+DEBUG nx::native::tasks::hash_planner: get_plans_internal COMPLETED in 2.861167ms - processed 1 tasks (setup: 2.109125ms, parallel_planning: 751.458µs)
+DEBUG nx::native::tasks::hashers::hash_workspace_files: Hashing workspace fileset with inputs: Adding "15650560168873631181" (".gitignore") to hash
+DEBUG nx::native::tasks::hashers::hash_workspace_files: Hashing workspace fileset with inputs: Adding "12717551077928321195" ("nx.json") to hash
+DEBUG nx::native::tasks::hashers::hash_workspace_files: Hashing workspace fileset with inputs: Hash Value: "9170483766122669532"
+DEBUG nx::native::tasks::task_hasher: hash_plans COMPLETED in 3.214083ms - processed 1 plans (setup: 473.583µs, hashing: 2.740334ms, assembly: 433.959µs)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.139Z - Serializing response for HASH_TASKS message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.139Z - Responding to HASH_TASKS message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.139Z - [REQUEST]: Responding to the client. handleHashTasks
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.139Z - Time taken for 'write cache' 6.954041000000018ms
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.140Z - Done responding to the client handleHashTasks
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.140Z - Handled json message HASH_TASKS. Handling time: 24. Response time: 1.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.140Z - [Messenger] Received message, length: 229998
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.340Z - [Messenger] Sending message type: GET_ESTIMATED_TASK_TIMINGS
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.341Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.341Z - Received raw message of length 95
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.341Z - Received json message of type GET_ESTIMATED_TASK_TIMINGS
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.356Z - Serializing response for GET_ESTIMATED_TASK_TIMINGS message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.356Z - Responding to GET_ESTIMATED_TASK_TIMINGS message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.356Z - [REQUEST]: Responding to the client. handleGetEstimatedTaskTimings
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.356Z - Done responding to the client handleGetEstimatedTaskTimings
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.356Z - Handled json message GET_ESTIMATED_TASK_TIMINGS. Handling time: 15. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.356Z - [Messenger] Received message, length: 2
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.488Z - [NX-CONSOLE]: Successfully pulled latest Nx to /private/var/folders/9w/62l_llr54tbgcdjzmp3fnghw0000gn/T/tmp-67319-w6BiiYoVZBWw
+[NX v22.6.3 Daemon Server] - 2026-04-01T16:02:07.597Z - [NX-CONSOLE]: Using local implementation (NX_USE_LOCAL=true or inner call)
+DEBUG nx::native::ide::install: Detected editor: Unknown
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.603Z - [NX-CONSOLE]: Console status check completed, shouldPrompt: false
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.976Z - [Messenger] Sending message type: RECORD_OUTPUTS_HASH
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.977Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.977Z - Received raw message of length 81
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.977Z - Received json message of type RECORD_OUTPUTS_HASH
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.977Z - Serializing response for RECORD_OUTPUTS_HASH message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.977Z - Responding to RECORD_OUTPUTS_HASH message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.977Z - [REQUEST]: Responding to the client. recordOutputsHash
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.977Z - Done responding to the client recordOutputsHash
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.977Z - Handled json message RECORD_OUTPUTS_HASH. Handling time: 0. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.977Z - [Messenger] Received message, length: 2
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.978Z - [Messenger] Sending message type: RECORD_TASK_RUNS
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.978Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.978Z - Received raw message of length 214
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.978Z - Received json message of type RECORD_TASK_RUNS
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.979Z - Serializing response for RECORD_TASK_RUNS message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.979Z - Responding to RECORD_TASK_RUNS message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.979Z - [REQUEST]: Responding to the client. handleRecordTaskRuns
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.979Z - Done responding to the client handleRecordTaskRuns
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.979Z - Handled json message RECORD_TASK_RUNS. Handling time: 1. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.979Z - [Messenger] Received message, length: 4
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.979Z - [Messenger] Sending message type: POST_TASKS_EXECUTION
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.980Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.980Z - Received raw message of length 68521
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.980Z - Received json message of type POST_TASKS_EXECUTION
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.980Z - Serializing response for POST_TASKS_EXECUTION message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.980Z - Responding to POST_TASKS_EXECUTION message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.980Z - [REQUEST]: Responding to the client. handleRunPostTasksExecution
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.980Z - Done responding to the client handleRunPostTasksExecution
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.980Z - Handled json message POST_TASKS_EXECUTION. Handling time: 0. Response time: 0.
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.980Z - Time taken for 'postTasksExecution' 0.09183400000006259ms
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:02:07.980Z - [Messenger] Received message, length: 4
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:02:07.984Z - Closed a connection. Number of open connections: 0
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:04:15.973Z - [Server] Daemon outdated: NX_VERSION_CHANGED
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:04:15.973Z - [Server] Shutting down daemon (no restart)...
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:04:15.974Z - [WATCHER]: Stopping the watcher for /Users/lucas/aiworkspace/sqk-qmedic-ui (sources)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:04:15.974Z - [WATCHER]: Stopping the watcher for /Users/lucas/aiworkspace/sqk-qmedic-ui (outputs)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:04:15.975Z - [NX-CONSOLE]: Cleaning up latest Nx installation from /private/var/folders/9w/62l_llr54tbgcdjzmp3fnghw0000gn/T/tmp-67319-w6BiiYoVZBWw
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:04:15.975Z - Server stopped because: "NX_VERSION_CHANGED"
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.090Z - [Client] Starting new daemon server in background
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.092Z - [Client] Waiting for server (max: 6000 attempts, 10ms interval)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.174Z - New daemon starting from: /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/nx/src/daemon/server/server.js
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.175Z - New daemon __dirname: /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/nx/src/daemon/server
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.175Z - New daemon nxVersion: 22.5.2
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.175Z - New daemon getInstalledNxVersion(): 22.5.2
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.176Z - [Server] Starting outdated check interval (20ms)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.176Z - Started listening on: /private/var/folders/9w/62l_llr54tbgcdjzmp3fnghw0000gn/T/239105504ffcff8010a6/d.sock
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.179Z - [WATCHER]: Subscribed to changes within: /Users/lucas/aiworkspace/sqk-qmedic-ui (native)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.180Z - [NX-CONSOLE]: Pulling latest Nx (latest) to check console status...
+Fetching nx...
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.182Z - [Client] Server available after 8 attempts
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.182Z - [Client] Daemon server started, pid=68678
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.182Z - [Messenger] Setting up socket listeners
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.182Z - [Messenger] listen() complete
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.183Z - [Messenger] Sending message type: REQUEST_PROJECT_GRAPH
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.183Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.228Z - Established a connection. Number of open connections: 1
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.229Z - Established a connection. Number of open connections: 2
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.229Z - Closed a connection. Number of open connections: 1
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.230Z - Received raw message of length 32
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.230Z - Received json message of type REQUEST_PROJECT_GRAPH
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.230Z - [REQUEST]: Client Request for Project Graph Received
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.242Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.242Z - [REQUEST]: 
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.242Z - [REQUEST]: 
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.244Z - No files changed, but no in-memory cached project graph found. Recomputing it...
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.318Z - [SYNC]: collect registered sync generators
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.343Z - Wrote project graph cache to /Users/lucas/aiworkspace/sqk-qmedic-ui/.nx/workspace-data/project-graph.json
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.343Z - Serializing response for REQUEST_PROJECT_GRAPH message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.343Z - Responding to REQUEST_PROJECT_GRAPH message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.343Z - [REQUEST]: Responding to the client. project-graph
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.344Z - Time taken for 'total for creating and serializing project graph' 113.44ms
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.347Z - Done responding to the client project-graph
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.347Z - Handled json message REQUEST_PROJECT_GRAPH. Handling time: 113. Response time: 4.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.348Z - [Messenger] Received message, length: 2040382
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.355Z - [Messenger] Sending message type: GET_CONTEXT_FILE_DATA
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.355Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.355Z - Received raw message of length 32
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.355Z - Received json message of type GET_CONTEXT_FILE_DATA
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.358Z - Serializing response for GET_CONTEXT_FILE_DATA message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.359Z - Responding to GET_CONTEXT_FILE_DATA message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.359Z - [REQUEST]: Responding to the client. handleContextFileData
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.360Z - Done responding to the client handleContextFileData
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.360Z - Handled json message GET_CONTEXT_FILE_DATA. Handling time: 3. Response time: 2.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.360Z - [Messenger] Received message, length: 507588
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.433Z - [NX-CONSOLE]: Successfully pulled latest Nx to /private/var/folders/9w/62l_llr54tbgcdjzmp3fnghw0000gn/T/tmp-68678-VZW9Ie5SFc6Z
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.484Z - [Messenger] Sending message type: REQUEST_PROJECT_GRAPH
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.485Z - [Messenger] Message sent
+[NX v22.6.3 Daemon Server] - 2026-04-01T16:06:28.539Z - [NX-CONSOLE]: Using local implementation (NX_USE_LOCAL=true or inner call)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.541Z - Received raw message of length 32
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.541Z - Received json message of type REQUEST_PROJECT_GRAPH
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.541Z - [REQUEST]: Client Request for Project Graph Received
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.541Z - Reusing in-memory cached project graph because no files changed.
+DEBUG nx::native::ide::install: Detected editor: Unknown
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.548Z - Wrote project graph cache to /Users/lucas/aiworkspace/sqk-qmedic-ui/.nx/workspace-data/project-graph.json
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.549Z - Serializing response for REQUEST_PROJECT_GRAPH message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.549Z - Responding to REQUEST_PROJECT_GRAPH message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.549Z - [REQUEST]: Responding to the client. project-graph
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.549Z - [NX-CONSOLE]: Console status check completed, shouldPrompt: false
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.549Z - Time taken for 'total for creating and serializing project graph' 7.7336669999999685ms
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.551Z - Done responding to the client project-graph
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.551Z - Handled json message REQUEST_PROJECT_GRAPH. Handling time: 8. Response time: 2.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.552Z - [Messenger] Received message, length: 2040382
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.559Z - [Messenger] Sending message type: PRE_TASKS_EXECUTION
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.560Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.560Z - Received raw message of length 1225
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.560Z - Received json message of type PRE_TASKS_EXECUTION
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.560Z - Serializing response for PRE_TASKS_EXECUTION message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.560Z - Responding to PRE_TASKS_EXECUTION message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.560Z - [REQUEST]: Responding to the client. handleRunPreTasksExecution
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.560Z - Done responding to the client handleRunPreTasksExecution
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.560Z - Handled json message PRE_TASKS_EXECUTION. Handling time: 0. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.560Z - [Messenger] Received message, length: 2
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.560Z - Time taken for 'preTasksExecution' 0.3629169999999817ms
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.583Z - [Messenger] Sending message type: HASH_TASKS
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.583Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.584Z - Received raw message of length 15627
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.584Z - Received json message of type HASH_TASKS
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.584Z - Reusing in-memory cached project graph because no files changed.
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.591Z - Wrote project graph cache to /Users/lucas/aiworkspace/sqk-qmedic-ui/.nx/workspace-data/project-graph.json
+DEBUG nx::native::tasks::hash_planner: get_plans_internal COMPLETED in 3.281583ms - processed 1 tasks (setup: 2.115ms, parallel_planning: 1.166375ms)
+DEBUG nx::native::tasks::hashers::hash_workspace_files: Hashing workspace fileset with inputs: Adding "15650560168873631181" (".gitignore") to hash
+DEBUG nx::native::tasks::hashers::hash_workspace_files: Hashing workspace fileset with inputs: Adding "12717551077928321195" ("nx.json") to hash
+DEBUG nx::native::tasks::hashers::hash_workspace_files: Hashing workspace fileset with inputs: Hash Value: "9170483766122669532"
+DEBUG nx::native::tasks::task_hasher: hash_plans COMPLETED in 3.353333ms - processed 1 plans (setup: 448.042µs, hashing: 2.905083ms, assembly: 432.084µs)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.609Z - Serializing response for HASH_TASKS message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.609Z - Responding to HASH_TASKS message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.609Z - [REQUEST]: Responding to the client. handleHashTasks
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.610Z - Time taken for 'write cache' 7.287583999999981ms
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.610Z - Done responding to the client handleHashTasks
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.610Z - Handled json message HASH_TASKS. Handling time: 25. Response time: 1.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.611Z - [Messenger] Received message, length: 229998
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.642Z - [Messenger] Sending message type: GET_ESTIMATED_TASK_TIMINGS
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.643Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.643Z - Received raw message of length 95
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.643Z - Received json message of type GET_ESTIMATED_TASK_TIMINGS
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.658Z - Serializing response for GET_ESTIMATED_TASK_TIMINGS message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.658Z - Responding to GET_ESTIMATED_TASK_TIMINGS message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.658Z - [REQUEST]: Responding to the client. handleGetEstimatedTaskTimings
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.658Z - Done responding to the client handleGetEstimatedTaskTimings
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:28.658Z - Handled json message GET_ESTIMATED_TASK_TIMINGS. Handling time: 15. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:28.658Z - [Messenger] Received message, length: 2
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:29.295Z - [Messenger] Sending message type: RECORD_OUTPUTS_HASH
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:29.295Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.295Z - Received raw message of length 81
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.295Z - Received json message of type RECORD_OUTPUTS_HASH
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.295Z - Serializing response for RECORD_OUTPUTS_HASH message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.295Z - Responding to RECORD_OUTPUTS_HASH message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.295Z - [REQUEST]: Responding to the client. recordOutputsHash
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.295Z - Done responding to the client recordOutputsHash
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.295Z - Handled json message RECORD_OUTPUTS_HASH. Handling time: 0. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:29.295Z - [Messenger] Received message, length: 2
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:29.296Z - [Messenger] Sending message type: RECORD_TASK_RUNS
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:29.296Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.296Z - Received raw message of length 214
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.296Z - Received json message of type RECORD_TASK_RUNS
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.296Z - Serializing response for RECORD_TASK_RUNS message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.296Z - Responding to RECORD_TASK_RUNS message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.296Z - [REQUEST]: Responding to the client. handleRecordTaskRuns
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.296Z - Done responding to the client handleRecordTaskRuns
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.296Z - Handled json message RECORD_TASK_RUNS. Handling time: 0. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:29.296Z - [Messenger] Received message, length: 4
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:29.297Z - [Messenger] Sending message type: POST_TASKS_EXECUTION
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:29.297Z - [Messenger] Message sent
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.297Z - Received raw message of length 68522
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.298Z - Received json message of type POST_TASKS_EXECUTION
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.298Z - Serializing response for POST_TASKS_EXECUTION message in json mode
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.298Z - Responding to POST_TASKS_EXECUTION message
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.298Z - [REQUEST]: Responding to the client. handleRunPostTasksExecution
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.298Z - Done responding to the client handleRunPostTasksExecution
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.298Z - Handled json message POST_TASKS_EXECUTION. Handling time: 0. Response time: 0.
+[NX v22.5.2 Daemon Client] - 2026-04-01T16:06:29.298Z - [Messenger] Received message, length: 4
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.298Z - Time taken for 'postTasksExecution' 0.08645899999987705ms
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:06:29.303Z - Closed a connection. Number of open connections: 0
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:23.953Z - [WATCHER]: addOns/externals/devDependencies/CHANGELOG.md was deleted
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:23.954Z - [SYNC]: clearing sync generators cache due to file changes
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:23.954Z - [WATCHER]: Processing file changes in outputs
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.049Z - [Server] lock file hash changed! old=10558933778724452639, new=5934328705988599205
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.049Z - [Server] Daemon outdated: LOCK_FILES_CHANGED
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.049Z - [Server] Restarting daemon...
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.050Z - Restarting daemon with script: /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/nx/src/daemon/server/start.js
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.050Z - Old daemon __dirname: /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/nx/src/daemon/server
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.050Z - Current process.execPath: /Users/lucas/.nvm/versions/node/v20.19.0/bin/node
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.051Z - Started new daemon process in background
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.052Z - [WATCHER]: Stopping the watcher for /Users/lucas/aiworkspace/sqk-qmedic-ui (sources)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.052Z - [WATCHER]: Stopping the watcher for /Users/lucas/aiworkspace/sqk-qmedic-ui (outputs)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.053Z - [NX-CONSOLE]: Cleaning up latest Nx installation from /private/var/folders/9w/62l_llr54tbgcdjzmp3fnghw0000gn/T/tmp-68678-VZW9Ie5SFc6Z
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.053Z - Server stopped because: "LOCK_FILES_CHANGED"
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.180Z - New daemon starting from: /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/nx/src/daemon/server/server.js
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.181Z - New daemon __dirname: /Users/lucas/aiworkspace/sqk-qmedic-ui/node_modules/nx/src/daemon/server
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.181Z - New daemon nxVersion: 22.5.2
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.181Z - New daemon getInstalledNxVersion(): 22.5.2
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.181Z - [Server] Starting outdated check interval (20ms)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.182Z - Started listening on: /private/var/folders/9w/62l_llr54tbgcdjzmp3fnghw0000gn/T/979d985d43a279fde74b/d.sock
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.183Z - [WATCHER]: Subscribed to changes within: /Users/lucas/aiworkspace/sqk-qmedic-ui (native)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.183Z - [NX-CONSOLE]: Pulling latest Nx (latest) to check console status...
+Fetching nx...
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.302Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.302Z - [REQUEST]: 
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.302Z - [REQUEST]: 
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:24.557Z - [SYNC]: collect registered sync generators
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:31.004Z - [NX-CONSOLE]: Successfully pulled latest Nx to /private/var/folders/9w/62l_llr54tbgcdjzmp3fnghw0000gn/T/tmp-69962-z50e11jb9DMc
+[NX v22.6.3 Daemon Server] - 2026-04-01T16:10:31.056Z - [NX-CONSOLE]: Using local implementation (NX_USE_LOCAL=true or inner call)
+DEBUG nx::native::ide::install: Detected editor: Unknown
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:31.057Z - [NX-CONSOLE]: Console status check completed, shouldPrompt: false
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:32.210Z - [Server] Daemon outdated: NX_VERSION_CHANGED
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:32.210Z - [Server] Shutting down daemon (no restart)...
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:32.210Z - [WATCHER]: Stopping the watcher for /Users/lucas/aiworkspace/sqk-qmedic-ui (sources)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:32.210Z - [WATCHER]: Stopping the watcher for /Users/lucas/aiworkspace/sqk-qmedic-ui (outputs)
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:32.210Z - [NX-CONSOLE]: Cleaning up latest Nx installation from /private/var/folders/9w/62l_llr54tbgcdjzmp3fnghw0000gn/T/tmp-69962-z50e11jb9DMc
+[NX v22.5.2 Daemon Server] - 2026-04-01T16:10:32.210Z - Server stopped because: "NX_VERSION_CHANGED"
