@@ -1,3 +1,0 @@
-{
-  "/(auth)/workflow/[name]/page": "app/(auth)/workflow/[name]/page.js"
-}

@@ -1,3 +1,0 @@
-{
-  "/(auth)/issue-knowledge/[knowledgeId]/page": "app/(auth)/issue-knowledge/[knowledgeId]/page.js"
-}

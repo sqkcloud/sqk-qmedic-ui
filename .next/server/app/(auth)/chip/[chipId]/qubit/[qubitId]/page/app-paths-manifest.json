@@ -1,3 +1,0 @@
-{
-  "/(auth)/chip/[chipId]/qubit/[qubitId]/page": "app/(auth)/chip/[chipId]/qubit/[qubitId]/page.js"
-}

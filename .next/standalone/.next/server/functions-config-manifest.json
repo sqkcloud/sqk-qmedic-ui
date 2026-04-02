@@ -1,7 +1,0 @@
-{
-  "version": 1,
-  "functions": {
-    "/api/copilot/chat/stream": {},
-    "/api/copilot/analyze/stream": {}
-  }
-}
